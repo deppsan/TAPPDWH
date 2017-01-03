@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Tarjetas_App</string>
+    <string name="mensaje_login">Ingresa a:</string>
+    <string name="banco_banorte">Tarjetas Banorte</string>
+    <string name="Usuario_placeholder">Usuario</string>
+    <string name="Password_Placeholder">Contraseña</string>
+    <string name="button_login1">Continuar</string>
+    <string name="etiqueta_notificaciones">NOTIFICACIONES</string>
+    <string name="mensaje_password">Ingresa tu Clave:</string>
+    <string name="saludo">Saludos</string>
+    <string name="LogOut">Salir</string>
+    <string name="TitleMisTarjetas">Mis Tarjetas</string>
+    <string name="SolicitaCelularBienvenida">Ingresa tu número celular: </string>
+    <string name="Celular">( +52 )</string>
+    <string name="preguntaCelular">Este número ya está registrado a una cuenta de usuario. ¿Quieres mantener ésta cuenta o crear una nueva?</string>
+    <string name="crearCuentaNueva">Crear Nueva</string>
+    <string name="continuarCuenta">Continuar</string>
+    <string name="TitleApp">Tarjetas Banorte</string>
+    <string name="lblAltaUsuario">ALTA DE USUARIO</string>
+    <string name="lblNombreUsuario">Nombre(s)</string>
+    <string name="hintNombreUsuario">Nombre del dueño de la tarjeta</string>
+    <string name="lblAppPaterno">Apellido Paterno</string>
+    <string name="hintApellidoPaterno">Apellido del Titular</string>
+    <string name="lblAppMaterno">Apellido Materno</string>
+    <string name="hintApellidoMaterno">Apellido del Titular</string>
+    <string name="lblUsuario">Usuario</string>
+    <string name="hintUsuarioFormulario">Usuario con el que accederá a la aplicación</string>
+    <string name="lblContraseñaFormulario">Contraseña</string>
+    <string name="hintContraseñFormulario">Contraseña con la que accederá a la aplicación</string>
+    <string name="lblConfirmarContraseña">Confirma Contraseña</string>
+    <string name="lblCorreoElectronico">Correo Electronico</string>
+    <string name="hintCorreoElectronico">Correo al que se notificarán sus movimientos</string>
+    <string name="btnCrearUsuario">Crear Usurio</string>
+
+</resources>

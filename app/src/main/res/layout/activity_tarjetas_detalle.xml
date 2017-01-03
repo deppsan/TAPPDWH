@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center">
+        <include
+            android:id="@+id/tool_bar_Tarjetas_detalle"
+            layout="@layout/tool_bar" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v4.view.ViewPager
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="55dp"
+            android:layout_marginBottom="300dp"
+            android:paddingTop="5dp"
+            android:id="@+id/content_tarjetas_detail_superior" />
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="285dp"
+            android:gravity="bottom"
+            android:id="@+id/content_tarjetas_detail_inferior">
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pager_header"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="top"/>
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>
