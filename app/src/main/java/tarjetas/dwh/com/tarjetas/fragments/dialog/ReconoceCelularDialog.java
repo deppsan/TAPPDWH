@@ -16,7 +16,7 @@ import tarjetas.dwh.com.tarjetas.R;
  * Created by ricar on 02/01/2017.
  */
 
-public class ReconoceCelularFragment extends DialogFragment {
+public class ReconoceCelularDialog extends DialogFragment {
     public ReconoceCelularFragmentListener listener;
 
     @NonNull
