@@ -38,6 +38,29 @@ public class TarjetasApiClient {
 
     }
 
+    public void addNuevoUsuario(usuarioDTO usuario, Context context, final TarjetasApiAddUsuario listener){
+
+        if (usuario == null){
+            listener.onUsuarioAgregadoExitoso();
+        }else{
+            listener.onUsuarioAgregadoFalla();
+        }
+
+        /*new conexionHTTP().getInstance().getJsonResponse(context
+                , BASE_URL
+                , new conexionHTTP.VolleyCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+
+                    }
+
+                    @Override
+                    public void onError(int statusCode) {
+
+                    }
+                });*/
+    }
+
     public void getDetalleSaldosTarjetas(int idTarjeta,Context context, final TarjetasApiGetSaldosDetalle listener){
         new conexionHTTP().getInstance().getJsonResponse(context
                 , BASE_URL + "f_tarjetas_data.php?id_s=" + idTarjeta
@@ -214,5 +237,9 @@ public class TarjetasApiClient {
     public interface TarjetasApiGetSaldosDetalle{
         void onSaldoRecibido(TarjetasDTO tarjeta);
         void onFallaAlRecibirSaldo(mensaje error);
+    }
+    public interface TarjetasApiAddUsuario{
+        void onUsuarioAgregadoExitoso();
+        void onUsuarioAgregadoFalla();
     }
 }

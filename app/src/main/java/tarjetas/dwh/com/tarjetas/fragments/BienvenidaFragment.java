@@ -19,7 +19,7 @@ import com.daimajia.androidanimations.library.YoYo;
 
 
 import tarjetas.dwh.com.tarjetas.R;
-import tarjetas.dwh.com.tarjetas.fragments.dialog.ReconoceCelularFragment;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.ReconoceCelularDialog;
 import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
 
 /**
@@ -69,14 +69,15 @@ public class BienvenidaFragment extends Fragment implements  View.OnClickListene
     }
 
     private void revisaCelular(String celNumber, View anchorView){
-        Log.d("ASDF", "revisaCelular: " + celNumber);
         if (celNumber.matches("")){
             Toast.makeText(getContext(), "Ingrese un numero de celular!", Toast.LENGTH_SHORT).show();
             YoYo.with(Techniques.Shake).duration(200).playOn(frameSeccionBienvenida);
         }else if(celNumber.equals("8114678345")){
             listener.getCeluar(celNumber);
-            DialogFragment dialog = new ReconoceCelularFragment();
+            DialogFragment dialog = new ReconoceCelularDialog();
             dialog.show(getFragmentManager(), FragmentTags.BIENVENIDA_DIALOGO_CELULAR_FRAGMENT);
+        }else{
+            listener.crearNuevaCuenta();
         }
     }
 
@@ -98,5 +99,6 @@ public class BienvenidaFragment extends Fragment implements  View.OnClickListene
 
     public interface BienvenidaFragmentListener{
         void getCeluar(String celular);
+        void crearNuevaCuenta();
     }
 }

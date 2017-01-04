@@ -31,5 +31,7 @@
     <string name="lblCorreoElectronico">Correo Electronico</string>
     <string name="hintCorreoElectronico">Correo al que se notificarán sus movimientos</string>
     <string name="btnCrearUsuario">Crear Usurio</string>
+    <string name="AlertaDialogoUsuarioEnUso">El usuario capturado ya existe. Favor de capturar un usuario diferente.</string>
+    <string name="btnAceptar">Aceptar</string>
 
 </resources>

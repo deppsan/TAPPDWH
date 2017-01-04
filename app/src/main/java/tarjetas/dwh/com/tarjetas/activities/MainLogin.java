@@ -7,9 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MotionEvent;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import tarjetas.dwh.com.tarjetas.DTO.usuarioDTO;
 import tarjetas.dwh.com.tarjetas.R;
@@ -17,13 +15,13 @@ import tarjetas.dwh.com.tarjetas.fragments.BienvenidaFragment;
 import tarjetas.dwh.com.tarjetas.fragments.FormularioUsuarioFragment;
 import tarjetas.dwh.com.tarjetas.fragments.LoginFragment;
 import tarjetas.dwh.com.tarjetas.fragments.PasswordFragment;
-import tarjetas.dwh.com.tarjetas.fragments.dialog.ReconoceCelularFragment;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.ReconoceCelularDialog;
 import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
 import tarjetas.dwh.com.tarjetas.utilities.UtilsSharedPreference;
 
 
 public class MainLogin extends AppCompatActivity implements PasswordFragment.PasswordFragmentAuthListener
-        , LoginFragment.LoginFragmentAuthListener,ReconoceCelularFragment.ReconoceCelularFragmentListener
+        , LoginFragment.LoginFragmentAuthListener,ReconoceCelularDialog.ReconoceCelularFragmentListener
         , BienvenidaFragment.BienvenidaFragmentListener{
 
     private String userName;
@@ -93,7 +91,7 @@ public class MainLogin extends AppCompatActivity implements PasswordFragment.Pas
     }
 
     @Override
-    public void crearNuevaCuenta() {
+public void crearNuevaCuenta() {
         replaceFragment(R.id.frameContent,new FormularioUsuarioFragment(),FragmentTags.LOGIN_FORMULARIO_USUARIO_FRAGMENT,FragmentTags.BIENVENIDA_FRAGMENT);
     }
 

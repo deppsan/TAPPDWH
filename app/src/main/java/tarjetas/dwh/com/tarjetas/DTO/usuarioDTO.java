@@ -205,4 +205,6 @@ public class usuarioDTO extends mensaje {
         this.token = token;
         this.autho = autho;
     }
+
+    public usuarioDTO(){}
 }
