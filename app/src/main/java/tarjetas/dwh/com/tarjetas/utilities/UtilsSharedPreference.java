@@ -73,4 +73,14 @@ public class UtilsSharedPreference {
         editor.commit();
     }
 
+    public static void setEsperaCodigo(boolean settear){
+        editor.putBoolean("esperaCodigo",settear);
+        editor.commit();
+    }
+
+    public boolean getEsperaCodigo(){
+        boolean ver = preferences.getBoolean("esperaCodigo",false);
+        return ver;
+    }
+
 }

@@ -38,10 +38,20 @@ public class TarjetasApiClient {
 
     }
 
+    public void revisarCodigoSeguridad(String codigo, Context context, final TarjetasApiRevisarCodigoSeguridadListener listener ){
+        if (codigo.equalsIgnoreCase("ASDFG")){
+            listener.onCodigoCorrecto();
+        }else{
+            listener.onCodigoIncorrecto();
+        }
+    }
+
     public void addNuevoUsuario(usuarioDTO usuario, Context context, final TarjetasApiAddUsuario listener){
 
-        if (usuario == null){
-            listener.onUsuarioAgregadoExitoso();
+        if (usuario != null){
+            listener.onUsuarioAgregadoExitoso(1);
+            //listener.onUsuarioAgregadoExitoso(2);
+            //listener.onUsuarioAgregadoExitoso(3);
         }else{
             listener.onUsuarioAgregadoFalla();
         }
@@ -239,7 +249,12 @@ public class TarjetasApiClient {
         void onFallaAlRecibirSaldo(mensaje error);
     }
     public interface TarjetasApiAddUsuario{
-        void onUsuarioAgregadoExitoso();
+        void onUsuarioAgregadoExitoso(int opcion);
         void onUsuarioAgregadoFalla();
+    }
+
+    public interface TarjetasApiRevisarCodigoSeguridadListener{
+        void onCodigoCorrecto();
+        void onCodigoIncorrecto();
     }
 }

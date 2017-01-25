@@ -1,9 +1,11 @@
 package tarjetas.dwh.com.tarjetas.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +16,24 @@ import android.widget.Toast;
 
 import tarjetas.dwh.com.tarjetas.DTO.usuarioDTO;
 import tarjetas.dwh.com.tarjetas.R;
-import tarjetas.dwh.com.tarjetas.fragments.dialog.AdvertenciaUsurioDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.EmailMetodoSeguridadDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.OpcSolMetodoSeguridadDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.SMSMetodoSeguridadDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.SinOpcionesDeSeguridadDialog;
 import tarjetas.dwh.com.tarjetas.network.TarjetasApiClient;
-import tarjetas.dwh.com.tarjetas.utilities.EmailValidator;
+import tarjetas.dwh.com.tarjetas.utilities.ExpValidator;
 import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
+import tarjetas.dwh.com.tarjetas.utilities.UtilsSharedPreference;
 
 /**
  * Created by ricar on 03/01/2017.
  */
 
-public class FormularioUsuarioFragment extends Fragment implements View.OnClickListener, TarjetasApiClient.TarjetasApiAddUsuario {
+public class FormularioUsuarioFragment extends Fragment implements View.OnClickListener, TarjetasApiClient.TarjetasApiAddUsuario{
 
     private EditText txtNombreusuario;
     private EditText txtApPaterno;
     private EditText txtApMaterno;
-    private EditText txtUsuario;
     private EditText txtContraseña;
     private EditText txtConfContraseña;
     private EditText txtEmail;
@@ -38,18 +43,19 @@ public class FormularioUsuarioFragment extends Fragment implements View.OnClickL
     private final String ERROR_CONTRASEÑAS = "Contraseña no coincide";
     private final String ERROR_FORMATO_CORREO = "El formato de correo no es correcto";
 
+    DialogFragment dialog = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login_formulario,container,false);
 
         txtNombreusuario = (EditText) v.findViewById(R.id.txtNombreUsuario);
-        txtApPaterno = (EditText) v.findViewById(R.id.txtApellidoPaterno);
-        txtApMaterno = (EditText) v.findViewById(R.id.txtApellidoMaterno);
-        txtUsuario = (EditText) v.findViewById(R.id.txtUsuarioFormulario);
-        txtContraseña = (EditText) v.findViewById(R.id.txtContraseñaFromulario);
+        txtApPaterno     = (EditText) v.findViewById(R.id.txtApellidoPaterno);
+        txtApMaterno     = (EditText) v.findViewById(R.id.txtApellidoMaterno);
+        txtContraseña    = (EditText) v.findViewById(R.id.txtContraseñaFromulario);
         txtConfContraseña = (EditText) v.findViewById(R.id.txtConfirmaContraseña);
-        txtEmail = (EditText) v.findViewById(R.id.txtCorreoFromulario);
+        txtEmail          = (EditText) v.findViewById(R.id.txtCorreoFromulario);
 
         btnCrearUsuario = (Button) v.findViewById(R.id.btnCrearUsuario);
         btnCrearUsuario.setOnClickListener(this);
@@ -62,7 +68,7 @@ public class FormularioUsuarioFragment extends Fragment implements View.OnClickL
         switch (v.getId()){
             case R.id.btnCrearUsuario:
                 if (validaCampos()){
-                    usuarioDTO user = null;
+                    usuarioDTO user = new usuarioDTO();
                     TarjetasApiClient.getInstance().addNuevoUsuario(user,getContext(),this);
                     Toast.makeText(getContext(), "Campos correcto", Toast.LENGTH_SHORT).show();
                 }else {
@@ -72,13 +78,9 @@ public class FormularioUsuarioFragment extends Fragment implements View.OnClickL
         }
     }
 
-    private boolean isValidEmail(String email){
-        return !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
     private boolean validaCampos(){
         boolean valida = true;
-       /* if (txtNombreusuario.getText().toString().trim().equals("")){
+        if (txtNombreusuario.getText().toString().trim().equals("")){
             txtNombreusuario.setError(ERROR_CAMPO_NECESARIO);
             valida = false;
         }
@@ -90,11 +92,6 @@ public class FormularioUsuarioFragment extends Fragment implements View.OnClickL
 
         if (txtApMaterno.getText().toString().trim().equals("")){
             txtApMaterno.setError(ERROR_CAMPO_NECESARIO);
-            valida = false;
-        }
-
-        if (txtUsuario.getText().toString().trim().equals("")){
-            txtUsuario.setError(ERROR_CAMPO_NECESARIO);
             valida = false;
         }
 
@@ -112,7 +109,7 @@ public class FormularioUsuarioFragment extends Fragment implements View.OnClickL
             txtEmail.setError(ERROR_CAMPO_NECESARIO);
             valida = false;
         }else{
-            if(!EmailValidator.getInstance().validate(txtEmail.getText().toString())){
+            if(!ExpValidator.getInstance().validateEmail(txtEmail.getText().toString())){
                 txtEmail.setError(ERROR_FORMATO_CORREO);
                 valida = false;
             }
@@ -121,21 +118,33 @@ public class FormularioUsuarioFragment extends Fragment implements View.OnClickL
         if (!txtContraseña.getText().toString().trim().equalsIgnoreCase(txtConfContraseña.getText().toString().trim())){
             txtConfContraseña.setError(ERROR_CONTRASEÑAS);
             valida = false;
-        }*/
+        }
 
         return  valida;
     }
 
-
     @Override
-    public void onUsuarioAgregadoExitoso() {
-
+    public void onUsuarioAgregadoExitoso(int opciones) {
+        switch (opciones){
+            case 1:
+                dialog = new OpcSolMetodoSeguridadDialog();
+                break;
+            case 2:
+                dialog = new SMSMetodoSeguridadDialog();
+                break;
+            case 3:
+                dialog = new EmailMetodoSeguridadDialog();
+                break;
+            default:
+                dialog = new SinOpcionesDeSeguridadDialog();
+                break;
+        }
+        dialog.show(getFragmentManager(),FragmentTags.LOGIN_FORMULARIO_USUARIO_FRAGMENT);
     }
 
     @Override
     public void onUsuarioAgregadoFalla() {
-        DialogFragment dialog = new AdvertenciaUsurioDialog();
-        dialog.show(getFragmentManager(), FragmentTags.LOGIN_FORMULARIO_USUARIO_FRAGMENT);
+        Toast.makeText(getContext(), "Error al crear usuario", Toast.LENGTH_SHORT).show();
     }
 }
 

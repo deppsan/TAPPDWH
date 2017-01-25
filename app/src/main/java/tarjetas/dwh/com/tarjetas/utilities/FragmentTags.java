@@ -10,6 +10,7 @@ public final class FragmentTags {
     public static final String BIENVENIDA_FRAGMENT = "Bienvenida";
     public static final String BIENVENIDA_DIALOGO_CELULAR_FRAGMENT = "BienvenidaDialogoCelular";
     public static final String LOGIN_FORMULARIO_USUARIO_FRAGMENT = "FormularioUsuario";
+    public static final String LOGIN_CODIGO_SEGURIDAD_FRAGMENT = "CodigoSeguridad";
 
 
     /*Todas las pantallas que tengan que ver con la seccion de Mis Tarjetas*/

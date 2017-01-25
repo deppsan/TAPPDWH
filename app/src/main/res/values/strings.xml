@@ -10,9 +10,9 @@
     <string name="saludo">Saludos</string>
     <string name="LogOut">Salir</string>
     <string name="TitleMisTarjetas">Mis Tarjetas</string>
-    <string name="SolicitaCelularBienvenida">Ingresa tu número celular: </string>
+    <string name="SolicitaCelularBienvenida">Ingresa tarjeta de crédito: </string>
     <string name="Celular">( +52 )</string>
-    <string name="preguntaCelular">Este número ya está registrado a una cuenta de usuario. ¿Quieres mantener ésta cuenta o crear una nueva?</string>
+    <string name="preguntaCelular">Este número ya está registrado a una cuenta. ¿Quieres mantener ésta cuenta o crear una nueva?</string>
     <string name="crearCuentaNueva">Crear Nueva</string>
     <string name="continuarCuenta">Continuar</string>
     <string name="TitleApp">Tarjetas Banorte</string>
@@ -30,8 +30,16 @@
     <string name="lblConfirmarContraseña">Confirma Contraseña</string>
     <string name="lblCorreoElectronico">Correo Electronico</string>
     <string name="hintCorreoElectronico">Correo al que se notificarán sus movimientos</string>
-    <string name="btnCrearUsuario">Crear Usurio</string>
-    <string name="AlertaDialogoUsuarioEnUso">El usuario capturado ya existe. Favor de capturar un usuario diferente.</string>
+    <string name="btnCrearUsuario">Crear cuenta</string>
     <string name="btnAceptar">Aceptar</string>
+    <string name="MensajeOpcionesMetodoSeguridad">Se le enviará un código de seguridad. ¿Qué método prefiere que se le sea envíado su código de seguridad?</string>
+    <string name="EtiquetaMail">email</string>
+    <string name="Etiquetasms">sms</string>
+    <string name="lblCodigoSeguridadAviso">Favor de introducir el Código de Seguridad que se te ha proporcionado:</string>
+    <string name="avisoPrivacidad">BANORTE, Inc. (que opera como BANORTE) y sus empresas afiliadas (en adelante denominadas conjuntamente "BANORTE") respetan su privacidad. BANORTE protege y es responsable por sus datos personales. Este aviso de privacidad para el programa Priceless MEXICO (en adelante denominado, el “Aviso de Privacidad”) describe los tipos de información personal que recolectamos bajo dichos programas, la forma en la que es utilizada, con quién la compartimos y las decisiones que usted puede tomar acerca del uso que le damos a su información personal.</string>
+    <string name="btnAceptarAviso">Aceptar</string>
 
+    <string name="MensajeSMSMetodoSeguridad">Se le enviará un código de seguridad por medio de mensaje SMS.</string>
+    <string name="MensajeEmailMetodoSeguridad">Se le enviará un código de seguridad al correo ingresado.</string>
+    <string name="MensajeSinOpcionesSeguridad">Error al crear el usuario, no cuenta con opciones para mandar codigo de seguridad.</string>
 </resources>

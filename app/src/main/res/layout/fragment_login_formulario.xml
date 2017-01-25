@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/banner"
-        android:layout_marginBottom="77dp">
+        android:layout_marginBottom="78dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -30,8 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:gravity="left"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -41,7 +41,10 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:textSize="15dp"
                 android:hint="@string/hintNombreUsuario"
                 android:id="@+id/txtNombreUsuario"
@@ -59,12 +62,12 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:id="@+id/frameApPaterno"
-                    android:layout_below="@id/txtNombreUsuario">
+                    android:layout_below="@id/txtNombreUsuario"
+                    android:layout_marginLeft="@dimen/activity_vertical_margin">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:gravity="left"
                         android:textSize="18dp"
                         android:textStyle="bold"
@@ -75,7 +78,9 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/hintApellidoPaterno"
                         android:textSize="15dp"
-                        android:layout_margin="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
                         android:id="@+id/txtApellidoPaterno"
                         android:layout_below="@id/lblAppPaterno"/>
                 </RelativeLayout>
@@ -85,12 +90,11 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:id="@+id/frameApMaterno"
-                    android:layout_below="@id/txtNombreUsuario">
+                    android:layout_below="@id/txtNombreUsuario"
+                    android:layout_marginRight="@dimen/activity_vertical_margin">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:gravity="left"
                         android:textSize="18dp"
                         android:textStyle="bold"
@@ -100,8 +104,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hintApellidoMaterno"
+                        android:layout_marginTop="10dp"
                         android:textSize="15dp"
-                        android:layout_margin="10dp"
                         android:id="@+id/txtApellidoMaterno"
                         android:layout_below="@+id/lblAppMaterno"/>
                 </RelativeLayout>
@@ -110,27 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/frameApellidos"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:gravity="left"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:id="@+id/lblUsuario"
-                android:text="@string/lblUsuario"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hintUsuarioFormulario"
-                android:textSize="15dp"
-                android:layout_margin="10dp"
-                android:id="@+id/txtUsuarioFormulario"
-                android:layout_below="@+id/lblUsuario"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txtUsuarioFormulario"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:gravity="left"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -141,7 +126,10 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hintContraseñFormulario"
                 android:textSize="15dp"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/txtContraseñaFromulario"
                 android:layout_below="@+id/lblContraseñaFormulario"
                 android:inputType="textPassword"/>
@@ -149,8 +137,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtContraseñaFromulario"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:gravity="left"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -160,7 +148,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/txtConfirmaContraseña"
                 android:layout_below="@+id/blConfirmaContraseña"
                 android:inputType="textPassword"/>
@@ -168,8 +159,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtConfirmaContraseña"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:gravity="left"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -180,7 +171,10 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hintCorreoElectronico"
                 android:textSize="15dp"
-                android:layout_margin="10dp"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/txtCorreoFromulario"
                 android:layout_below="@+id/lblCorreo"
                 android:inputType="textEmailAddress"/>
@@ -200,5 +194,8 @@
         android:textColor="@color/white"
         android:textSize="20dp"
         android:layout_marginTop="0dp"
-        android:layout_margin="8dp"/>
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="10dp"
+        android:elevation="@dimen/floating_button"/>
 </RelativeLayout>

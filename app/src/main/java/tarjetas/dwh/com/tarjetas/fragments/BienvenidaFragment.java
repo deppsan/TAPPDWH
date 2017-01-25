@@ -19,7 +19,9 @@ import com.daimajia.androidanimations.library.YoYo;
 
 
 import tarjetas.dwh.com.tarjetas.R;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.OpcSolMetodoSeguridadDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ReconoceCelularDialog;
+import tarjetas.dwh.com.tarjetas.utilities.ExpValidator;
 import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
 
 /**
@@ -28,8 +30,8 @@ import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
 
 public class BienvenidaFragment extends Fragment implements  View.OnClickListener, View.OnTouchListener {
 
-    Button btnRevisarCelular;
-    EditText txtCelularBienvenida;
+    Button btnRevisarTarjeta;
+    EditText txtTarjetaBienvenida;
     View frameSeccionBienvenida;
 
     BienvenidaFragmentListener listener;
@@ -39,12 +41,12 @@ public class BienvenidaFragment extends Fragment implements  View.OnClickListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,  Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login_bienvenida,null);
 
-        txtCelularBienvenida = (EditText) v.findViewById(R.id.txtCelularBienvenida);
-        btnRevisarCelular = (Button) v.findViewById(R.id.btnRevisarCelular);
+        txtTarjetaBienvenida = (EditText) v.findViewById(R.id.txtCelularBienvenida);
+        btnRevisarTarjeta = (Button) v.findViewById(R.id.btnRevisarCelular);
         frameSeccionBienvenida = (View) v.findViewById(R.id.frameSeccionBienvenida);
 
-        btnRevisarCelular.setOnTouchListener(this);
-        btnRevisarCelular.setOnClickListener(this);
+        btnRevisarTarjeta.setOnTouchListener(this);
+        btnRevisarTarjeta.setOnClickListener(this);
 
         return v;
     }
@@ -53,7 +55,7 @@ public class BienvenidaFragment extends Fragment implements  View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnRevisarCelular:
-                revisaCelular(txtCelularBienvenida.getText().toString(),v);
+                revisaCelular(txtTarjetaBienvenida.getText().toString(),v);
                 break;
         }
     }
@@ -62,21 +64,26 @@ public class BienvenidaFragment extends Fragment implements  View.OnClickListene
     public boolean onTouch(View v, MotionEvent event) {
         switch (v.getId()){
             case R.id.btnRevisarCelular:
-                YoYo.with(Techniques.Pulse).duration(50).playOn(btnRevisarCelular);
+                YoYo.with(Techniques.Pulse).duration(50).playOn(btnRevisarTarjeta);
                 break;
         }
         return false;
     }
 
-    private void revisaCelular(String celNumber, View anchorView){
-        if (celNumber.matches("")){
-            Toast.makeText(getContext(), "Ingrese un numero de celular!", Toast.LENGTH_SHORT).show();
+    private void revisaCelular(String numTarjeta, View anchorView){
+        if (numTarjeta.length() != 16){
+
+            Toast.makeText(getContext(), "El numero de tarjeta no es valido, debe de contener al menos 16 caracteres.", Toast.LENGTH_SHORT).show();
             YoYo.with(Techniques.Shake).duration(200).playOn(frameSeccionBienvenida);
-        }else if(celNumber.equals("8114678345")){
-            listener.getCeluar(celNumber);
+
+        }else if(numTarjeta.equals("8114678345")){
+
+            listener.getCeluar(numTarjeta);
             DialogFragment dialog = new ReconoceCelularDialog();
             dialog.show(getFragmentManager(), FragmentTags.BIENVENIDA_DIALOGO_CELULAR_FRAGMENT);
+
         }else{
+            listener.getCeluar(numTarjeta);
             listener.crearNuevaCuenta();
         }
     }
