@@ -27,7 +27,7 @@
         android:text="@string/btnAceptarAviso"
         android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:id="@+id/btnRevisarCelular"
+        android:id="@+id/btnAceptrPrivacidad"
         android:background="@color/red"
         android:textColor="@color/white"
         android:textSize="20dp"

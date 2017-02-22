@@ -67,7 +67,7 @@ public class DetalleTarjetasFragment extends Fragment implements TarjetasApiClie
     @Override
     public void onSaldoRecibido(TarjetasDTO tarjeta) {
         txtNombreTarjeta.setText(tarjeta.getTarjeta());
-        txtNumeroTarjeta.setText("**** **** **** 4567");
+        txtNumeroTarjeta.setText("**** **** **** 1234");
         Picasso.with(getContext()).load(tarjeta.getImagen()).placeholder(R.drawable.bankcard).into(imgTarjeta);
         ArrayList<DetallesTarjetaSaldosObject> data = new ArrayList<DetallesTarjetaSaldosObject>();
 

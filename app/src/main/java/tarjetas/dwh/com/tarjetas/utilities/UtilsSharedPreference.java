@@ -38,18 +38,6 @@ public class UtilsSharedPreference {
         return ver;
     }
 
-    public static boolean isCelularAsigned(){
-        boolean ver = false;
-        if (preferences.contains("celularNumber")){
-            ver = true;
-        }
-        return ver;    }
-
-    public static void setCelularNumber(String celularNumber){
-        editor.putString("celularNumber",celularNumber);
-        editor.commit();
-    }
-
     public static void setUserSharedPreference(usuarioDTO user){
         String userJson = TarjetasApiClient.gson.toJson(user);
         editor.putString("user",userJson);
@@ -80,6 +68,32 @@ public class UtilsSharedPreference {
 
     public boolean getEsperaCodigo(){
         boolean ver = preferences.getBoolean("esperaCodigo",false);
+        return ver;
+    }
+
+    public static boolean primeraEntrada(){
+        boolean ver = true;
+        if (preferences.contains("primeraEntrada")){
+            ver = false;
+        }
+        return ver;
+    }
+
+    public static void setPrimeraEntrada(boolean status){
+        editor.putBoolean("primeraEntrada",status);
+        editor.commit();
+    }
+
+    public static void setUserActive(boolean status){
+        editor.putBoolean("isUserActive",status);
+        editor.commit();
+    }
+
+    public static boolean isUserActive(){
+        boolean ver = false;
+        if (preferences.contains("isUserActive")){
+            ver = true;
+        }
         return ver;
     }
 
