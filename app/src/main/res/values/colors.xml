@@ -5,7 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="red">#F1401A</color>
     <color name="white">#FFFCFC</color>
+    <color name="whiteTransp">#99FFFCFC</color>
     <color name="black">#000000</color>
     <color name="MenuNaviBlack">#4e4044</color>
     <color name="green">#66ff66</color>
+    <color name="gray">#aeb5c1</color>
+    <color name="mostaza">#ffc900</color>
 </resources>

@@ -56,4 +56,6 @@ public abstract class TransaccionesAdapter extends BaseAdapter {
     }
 
     public abstract void onEntrada(Object saldo, View view);
+
+
 }

@@ -30,7 +30,7 @@ import tarjetas.dwh.com.tarjetas.network.TarjetasApiClient;
  * Created by ricar on 13/02/2017.
  */
 
-public class DetalleTransaccionesFragment extends Fragment implements TarjetasApiClient.TarjetasApiTransaccionesListener {
+public class DetalleTransaccionesFragment extends Fragment implements TarjetasApiClient.TarjetasApiTransaccionesListener, AdapterView.OnItemClickListener {
 
     private ListView lstTransacciones;
     private int idTarjeta;
@@ -41,7 +41,7 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
         View v = inflater.inflate(R.layout.fragment_detalle_transacciones,container,false);
         lstTransacciones = (ListView) v.findViewById(R.id.lstTransacciones);
 
-        lstTransacciones.setOnItemClickListener(new onTransaccionSeleccionada());
+        lstTransacciones.setOnItemClickListener(this);
 
 
         TarjetasApiClient.getInstance().getTransaccionesTarjeta("",getContext(),this);
@@ -92,7 +92,6 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
                         imagenFlag = R.drawable.flaggreen;
                         break;
                 }
-
                 Picasso.with(getContext()).load(imagenFlag).into(categoria);
 
             }
@@ -100,21 +99,14 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
 
     }
 
-    private void tarjetaSeleccionada(int position){
-        Toast.makeText(getContext(), String.valueOf(position), Toast.LENGTH_SHORT).show();
-    }
-
-    private class onTransaccionSeleccionada implements ListView.OnItemClickListener{
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            tarjetaSeleccionada(position);
-        }
-    }
-
     @Override
     public void onTransaccionesFalla() {
-
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getContext(), "porfavor funciona!!", Toast.LENGTH_SHORT).show();
+
+    }
 }

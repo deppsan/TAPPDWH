@@ -39,7 +39,6 @@ public class MainPage extends BaseActivity implements TarjetasListaFragment.Tarj
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(this,"OnResume",Toast.LENGTH_SHORT).show();
     }
 }
 

@@ -43,4 +43,32 @@
     <string name="MensajeSMSMetodoSeguridad">Se le enviará un código de seguridad por medio de mensaje SMS.</string>
     <string name="MensajeEmailMetodoSeguridad">Se le enviará un código de seguridad al correo ingresado.</string>
     <string name="MensajeSinOpcionesSeguridad">Error al crear el usuario, no cuenta con opciones para mandar codigo de seguridad.</string>
+
+    <string name="RegresarButton">Regresar</string>
+    
+    <string name="MensajeBloquearTarjetaTitulo">¿Estas seguro de ejecutar esta operación?</string>
+    <string name="MensajeBloquearTarjeta">Todas las transacciones serán declinadas, no podrás hacer compras temporalmente.</string>
+    <string name="btnConfirmar">Confirmar</string>
+    <string name="btnCancelar">Cancelar</string>
+
+    <string name="MensajeDesbloquearTarjeta">Su tarjeta ha sido habilitada nuevamente para hacer compras</string>
+    <string name="MensajeDesbloquearTarjetaTitulo">Control de Tarjeta</string>
+
+    <string name="btnRoboExtravio">Reportar Tarjeta</string>
+    <string name="btnRoboExtravioReportada">Tarjeta Reportada</string>
+
+    <string name="ReporteRoboTitulo">¿Estas seguro de reportar tu tarjeta como robada y/o extraviada?</string>
+    <string name="ReporteRoboMensaje">Se cancelará tu plastico actual y te enviaremos un plastico nuevo.</string>
+
+    <string name="LineaTitularTotal">Línea Titular Total</string>
+    <string name="TarjetaTitular">Tarjeta Titular</string>
+    <string name="TarjetaAdicional">Tarjeta Adicional</string>
+    <string name="ModificarLinea"><u>¿Quieres modificar la línea?</u></string>
+    <string name="SolicitarAumentoLinea">¿Quieres solicitar un aumento de tu línea actual de crédito? Solícitala aquí.</string>
+
+    <string name="titleDialogAumentarLinea">Linea de Crédito</string>
+    <string name="mensajeDialogAumentarLinea1">Esta solicitando un aumento de su Línea de credito actual de </string>
+    <string name="mensajeDialogAumentarLinea2">, ¿Esta de acuerdo en esta acción?</string>
+    <string name="mensajeAumentoDeLineaAceptada">Su solicitud ha sido recivida en breve le enviaremos una respuesta a su petición.</string>
+
 </resources>

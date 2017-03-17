@@ -8,5 +8,6 @@
         android:id="@+id/lstServiciosMenu"
         android:choiceMode="singleChoice"
         android:dividerHeight="1dp"
-        android:divider="@android:color/black"/>
+        android:descendantFocusability="beforeDescendants"
+        android:divider="@android:color/black" />
 </LinearLayout>

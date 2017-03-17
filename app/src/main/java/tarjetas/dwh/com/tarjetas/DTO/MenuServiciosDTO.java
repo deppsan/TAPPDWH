@@ -6,12 +6,14 @@ package tarjetas.dwh.com.tarjetas.DTO;
 
 public class MenuServiciosDTO {
 
+    public int id;
     private int imagen;
     private String menu;
 
-    public MenuServiciosDTO(int imagen, String menu) {
+    public MenuServiciosDTO(int imagen, String menu, int id) {
         this.imagen = imagen;
         this.menu = menu;
+        this.id = id;
     }
 
     public int getImagen() {
@@ -28,5 +30,13 @@ public class MenuServiciosDTO {
 
     public void setMenu(String menu) {
         this.menu = menu;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
