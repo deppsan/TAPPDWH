@@ -40,7 +40,7 @@ public abstract class PromocionesDetallesAdapter extends BaseAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return false;
+        return true;
     }
 
     @Override

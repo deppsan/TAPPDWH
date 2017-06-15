@@ -9,11 +9,21 @@ public class MenuServiciosControlDrawerObject {
     private String txtTitulo;
     private String txtDescripcion;
     private int id;
+    private boolean isActive;
 
-    public MenuServiciosControlDrawerObject(String txtTitulo, String txtDescripcion, int id) {
+    public MenuServiciosControlDrawerObject(String txtTitulo, String txtDescripcion, int id, boolean isActive) {
         this.txtTitulo = txtTitulo;
         this.txtDescripcion = txtDescripcion;
         this.id = id;
+        this.isActive = isActive;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public String getTxtTitulo() {

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/nav_mis_detalles"
     android:fitsSystemWindows="true">
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,4 +39,12 @@
             android:id="@+id/content_tarjetas_detail_inferior">
         </tarjetas.dwh.com.tarjetas.utilities.custom.customViewPager>
     </RelativeLayout>
+    <ListView
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:choiceMode="singleChoice"
+        android:background="@color/black"
+        android:layout_marginTop="55dp"
+        android:id="@+id/right_navigator_category"/>
 </android.support.v4.widget.DrawerLayout>

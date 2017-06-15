@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="65dp"
+    android:orientation="vertical"
+        android:id="@+id/ViewCategorias">
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:id="@+id/grdCategorias"
+        android:numColumns="3">
+    </GridView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/red"
+        android:layout_marginTop="-84dp"
+        android:text="Mes"
+        android:layout_below="@id/grdCategorias"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"/>
+</RelativeLayout>

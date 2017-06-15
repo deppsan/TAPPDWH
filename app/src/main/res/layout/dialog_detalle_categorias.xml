@@ -3,20 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:id="@+id/lstNuevaCategoria"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"></ListView>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:id="@+id/lstCategorias"
+        android:layout_height="80dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp">
-    </ListView>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/txtNombreCategoriaNueva"
+            android:inputType="textCapCharacters"
+            android:hint="@string/hintNombreCategoria"/>
+    </LinearLayout>
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/grdImagenesCategorias"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:numColumns="4"
+        android:clickable="true"
+        android:listSelector="@drawable/select_dot">
+    </GridView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,16 +37,15 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="52dp"
-            android:id="@+id/btnCancelarCategoria"
+            android:id="@+id/btnCancelarCrearCategoria"
             android:background="@color/white"
             android:text="Cancelar"/>
         <Button
             android:layout_width="120dp"
             android:layout_height="52dp"
             android:layout_marginLeft="8dp"
-            android:id="@+id/btnAceptarCambioCategoria"
+            android:id="@+id/btnAceptarCrearCategoria"
             android:background="@color/white"
             android:text="Confirmar"/>
-
     </LinearLayout>
 </LinearLayout>

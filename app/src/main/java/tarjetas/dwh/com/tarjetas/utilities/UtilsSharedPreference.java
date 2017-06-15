@@ -84,7 +84,9 @@ public class UtilsSharedPreference {
         editor.commit();
     }
 
-    public static void setUserActive(boolean status){
+    public static void setUserActive(boolean status,Context context){
+
+        RealmAdministrator.getInstance(context).crearCategoriasBase();
         editor.putBoolean("isUserActive",status);
         editor.commit();
     }

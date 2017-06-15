@@ -47,8 +47,9 @@ public class DetalleServiciosFragment extends Fragment{
         ArrayList<MenuServiciosDTO> datos = new ArrayList<MenuServiciosDTO>();
         datos.add(new MenuServiciosDTO(R.drawable.settings,"Controles de Tarjeta",0));
         datos.add(new MenuServiciosDTO(R.drawable.hammer,"Servicios",1));
-        datos.add(new MenuServiciosDTO(R.drawable.user,"Programa de Lealtad",2));
-        datos.add(new MenuServiciosDTO(R.drawable.bankcardfilled,"Activar Tarjeta",3));
+        datos.add(new MenuServiciosDTO(R.drawable.compass,"Seguimiento de Tarjeta",2));
+        datos.add(new MenuServiciosDTO(R.drawable.user,"Programa de Lealtad",3));
+        datos.add(new MenuServiciosDTO(R.drawable.bankcardfilled,"Activar Tarjeta",4));
 
         lstMenuServiciosPrincipal.setAdapter(new TransaccionesAdapter(datos,R.layout.object_servicios_menu_list,getContext()) {
             @Override
@@ -65,23 +66,8 @@ public class DetalleServiciosFragment extends Fragment{
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(final View v) {
-                        v.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.gray));
 
-                        final Handler h = new Handler();
-                        TimerTask doAsynchronusTask = new TimerTask() {
-                            @Override
-                            public void run() {
-                                h.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        v.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.white));
-                                        listener.onClickMenu(opMenu);
-                                    }
-                                });
-                            }
-                        };
-                        Timer timer = new Timer();
-                        timer.schedule(doAsynchronusTask,100);
+                        listener.onClickMenu(opMenu);
                     }
                 });
             }

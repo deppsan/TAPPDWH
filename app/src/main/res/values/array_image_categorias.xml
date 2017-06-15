@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="images_categories">
+        <item>@drawable/health_black</item>
+        <item>@drawable/stationery_black</item>
+        <item>@drawable/clothes_black</item>
+        <item>@drawable/shopping_cart_black</item>
+        <item>@drawable/airport_black</item>
+        <item>@drawable/church_black</item>
+        <item>@drawable/restaurant_black</item>
+        <item>@drawable/work_black</item>
+        <item>@drawable/bussiness_black</item>
+        <item>@drawable/inversion_black</item>
+        <item>@drawable/property_black</item>
+    </integer-array>
+</resources>

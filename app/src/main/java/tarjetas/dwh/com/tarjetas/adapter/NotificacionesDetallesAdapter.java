@@ -50,7 +50,7 @@ public abstract class NotificacionesDetallesAdapter extends BaseAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return false;
+        return true;
     }
     public abstract  void onEntrada(Object notificacion, View view);
 }

@@ -1,71 +1,80 @@
 package tarjetas.dwh.com.tarjetas.activities;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewParentCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.ClickableSpan;
 import android.text.style.ImageSpan;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.Menu;
-import android.view.MotionEvent;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import tarjetas.dwh.com.tarjetas.DTO.MenuServiciosDTO;
 import tarjetas.dwh.com.tarjetas.R;
+import tarjetas.dwh.com.tarjetas.adapter.CategoriasDrawerAdapter;
 import tarjetas.dwh.com.tarjetas.adapter.TransaccionesAdapter;
 import tarjetas.dwh.com.tarjetas.adapter.drawer.MenuServiciosControlDrawerObject;
+import tarjetas.dwh.com.tarjetas.adapter.drawer.TransaccionesObjectDrawer;
+import tarjetas.dwh.com.tarjetas.fragments.ControlLineaCreditoModificarLineaFragment;
 import tarjetas.dwh.com.tarjetas.fragments.ControlLineaDeCreditoFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleNotificacionesFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetallePromocionesFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleSeguimientoDeTarjetaFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosActivarTarjetaFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosControlFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosIngresarNipFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosNipMenuFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosProgramaLealtadFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSaldosPagosFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSolicitarNipFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSubMenuFragment;
-import tarjetas.dwh.com.tarjetas.fragments.DetalleTarjetaGrafico;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleTarjetasFragment;
-import tarjetas.dwh.com.tarjetas.fragments.DetalleNotificacionesFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleTransaccionesFragment;
 import tarjetas.dwh.com.tarjetas.fragments.ReporteRoboExtravioFragment;
 import tarjetas.dwh.com.tarjetas.fragments.RoboExtravioReportadaFragment;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.AsignacionDeNipDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.AumentoDeLineaCreditoDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.AvisoAumentoDeLineaCreditoAceptadaDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.DetalleServiciosActivarTarjetaActivadaDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.DetalleServiciosActivarTarjetaAvisoDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.DetalleServiciosControlLineaAvisoConfirmadoModificarLinea;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.DetalleServiciosControlLineaConfirmarModificarLineaDialog;
+import tarjetas.dwh.com.tarjetas.fragments.dialog.CategoriaCrearDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ReporteRoboExtravioDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ServiciosControlBloqueoTarjetaDesactivarDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ServiciosControlBloqueoTarjetaDialog;
 import tarjetas.dwh.com.tarjetas.utilities.ActivarFragmentos;
 import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
+import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
 
 /**
  * Created by ricar on 26/12/2016.
@@ -80,7 +89,21 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
                                                             , DetalleServiciosSubMenuFragment.DetalleServiciosSubMenuListener
                                                             , RoboExtravioReportadaFragment.RoboExtravioReportadaListener
                                                             , ControlLineaDeCreditoFragment.ControlLineaDeCreditoListener
-                                                            , AumentoDeLineaCreditoDialog.AumentoDeLineaCreditoListener{
+                                                            , AumentoDeLineaCreditoDialog.AumentoDeLineaCreditoListener
+                                                            , DetalleServiciosNipMenuFragment.DetalleServiciosNipMenuListener
+                                                            , DetalleServiciosIngresarNipFragment.DetalleServiciosIngresarNipListener
+                                                            , DetalleServiciosSolicitarNipFragment.DetalleServiciosSolicitarNipListener
+                                                            , DetalleSeguimientoDeTarjetaFragment.DetalleSeguimientoDeTarjetaListener
+                                                            , DetalleServiciosActivarTarjetaFragment.DetalleServiciosActivarTarjetaListener
+                                                            , DetalleServiciosActivarTarjetaAvisoDialog.DetalleServiciosActivarTarjetaAvisoListener
+                                                            , DetalleServiciosActivarTarjetaActivadaDialog.DetalleServiciosActivarTarjetaActivadaListener
+                                                            , DetalleServiciosSaldosPagosFragment.DetalleServiciosSaldosPagosListener
+                                                            , DetalleServiciosProgramaLealtadFragment.DetalleServiciosProgramaLealtadListener
+                                                            , ControlLineaCreditoModificarLineaFragment.ControlLineaCreditoModificarLineaListener
+                                                            , DetalleServiciosControlLineaConfirmarModificarLineaDialog.DetalleServiciosControlLineaConfirmarAumentoLineaDialogListener
+                                                            , DetalleServiciosControlLineaAvisoConfirmadoModificarLinea.DetalleServiciosControlLineaAvisoConfirmadoModificarLineaListener
+                                                            , DetalleTransaccionesFragment.DetalleTransaccionesListener
+                                                            , CategoriaCrearDialog.DialogCrearCategoriaListener{
 
 
     private FragmentPagerAdapter adapterViewPagerSuperior;
@@ -88,7 +111,15 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     private InferiorPageAdapter adapterViewPagerInferior;
     private ViewPager inferiorViewPager;
     private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private ListView lstNavigationCategory;
     private Switch switchDialog;
+    private View holdView;
+    private String holdTarjetaNumero;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    private TransaccionesAdapter tAdapterHolder;
+    private int adapterPosition;
+    private ArrayList<tarjetas.dwh.com.tarjetas.model.Categorias> categoriesImages;
 
     private DialogFragment  dialog;
 
@@ -98,6 +129,12 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarjetas_detalle);
+
+        toolbar = (Toolbar) findViewById(R.id.tool_bar_Tarjetas_detalle);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         mContext = this;
         int idTarjeta = getIntent().getIntExtra("idTarjeta",0);
@@ -131,14 +168,63 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar_Tarjetas_detalle);
         toolbar.setTitle("Mis Tarjetas");
+        toolbar.setTitleTextColor(ContextCompat.getColor(mContext,R.color.white));
 
         setSupportActionBar(toolbar);
+
+
+        /**
+         * Secciones de la pantalla
+         */
         superiorViewPager.setAdapter(adapterViewPagerSuperior);
         inferiorViewPager.setAdapter(adapterViewPagerInferior);
 
         tabs.setViewPager(inferiorViewPager);
 
+        lstNavigationCategory = (ListView) findViewById(R.id.right_navigator_category);
 
+        drawerLayout = (DrawerLayout) findViewById(R.id.nav_mis_detalles);
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+
+
+        categoriesImages = cargarInformacionMenuCategorias();
+
+        lstNavigationCategory.setAdapter(new CategoriasDrawerAdapter(categoriesImages,R.layout.object_categorias_lista,getApplicationContext()) {
+            @Override
+            public void onEntradaSet(View v, CategoriasDrawerAdapter.ViewHolder mHolder) {
+                mHolder.imageView = (ImageView) v.findViewById(R.id.imgLogoCategoria);
+            }
+
+            @Override
+            public void onEntrada(Object categorias, CategoriasDrawerAdapter.ViewHolder mHolder, int position) {
+                tarjetas.dwh.com.tarjetas.model.Categorias categoria = (tarjetas.dwh.com.tarjetas.model.Categorias) categorias;
+                if ((int) categoria.getImagen() == R.drawable.plus_white){
+                    Picasso.with(getApplicationContext()).load((int)categoria.getImagen()).resize(50,50).into(mHolder.imageView);
+                }else{
+                    Picasso.with(getApplicationContext()).load(RealmAdministrator.getInstance(getBaseContext()).getDrawableByCategory((int)categoria.getId(),true)).resize(50,50).into(mHolder.imageView);
+                }
+
+            }
+        });
+
+        lstNavigationCategory.getOnItemClickListener();
+        lstNavigationCategory.setOnItemClickListener(new DrawerItemClickListener());
+
+
+        lstNavigationCategory.bringToFront();
+        drawerLayout.requestLayout();
+
+    }
+
+    private ArrayList<tarjetas.dwh.com.tarjetas.model.Categorias> cargarInformacionMenuCategorias(){
+
+        ArrayList<tarjetas.dwh.com.tarjetas.model.Categorias> categorias = RealmAdministrator.getInstance(getBaseContext()).getAllCategorias();
+
+        tarjetas.dwh.com.tarjetas.model.Categorias catAgregar = new tarjetas.dwh.com.tarjetas.model.Categorias();
+        catAgregar.setImagen(R.drawable.plus_white);
+        categorias.add(catAgregar);
+        return categorias;
     }
 
     /**
@@ -150,12 +236,34 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     }
 
     /**
+     * Implementacion de boton para activar tarjetas en Servicios->Activar
+     */
+    @Override
+    public void onPresionarActivarTarjeta(View view, String tarjetaNumero) {
+        holdView = view;
+        holdTarjetaNumero  = tarjetaNumero;
+
+        dialog = new DetalleServiciosActivarTarjetaAvisoDialog();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(),FragmentTags.TARJETAS_DETALLE_FRAGMENT);
+    }
+
+    /**
+     * Implementacion de pantalla de seguimiento de la tarjeta, para enviar a la pantalla de activacion de tarjetas.
+     */
+    @Override
+    public void seleccionarActivarTarjetaDesdeSeguimiento() {
+        adapterViewPagerInferior.setPages(3,new DetalleServiciosActivarTarjetaFragment());
+    }
+
+    /**
      * Implementacion para ejecutar la modificación de la linea de credito de una tarjeta en especificada, ya sea la tarjeta seleccionada en el detalle (titular)
      * o una adicional.
      * @param linea
      */
     @Override
     public void onSeleccionarModificarLineaCredito(ControlLineaDeCreditoFragment.TarjetasLineas linea) {
+        adapterViewPagerInferior.setPages(3,new ControlLineaCreditoModificarLineaFragment());
     }
 
     /**
@@ -164,6 +272,7 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     @Override
     public void onSeleccionarAumentarLimitedeLineadeCredito(double totalLineaDeCredito) {
         dialog = AumentoDeLineaCreditoDialog.getInstance(totalLineaDeCredito);
+        dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(),FragmentTags.TARJETAS_DETALLE_FRAGMENT);
     }
 
@@ -196,16 +305,20 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
      * @param view que desata el evento click.
      */
     @Override
-    public void onClickSeleccionarMenu(Object menu, View view) {
+    public void onClickSeleccionarMenu(Object menu, View view, int position) {
         MenuServiciosControlDrawerObject optMenu = (MenuServiciosControlDrawerObject) menu;
+
+
         switch (optMenu.getId()){
             case 0 :
                 switchDialog = (Switch) view.findViewById(R.id.swtServiciosControl);
                 if (switchDialog.isChecked()){
                     dialog = new ServiciosControlBloqueoTarjetaDialog();
+                    dialog.setCancelable(false);
                     dialog.show(getSupportFragmentManager(), FragmentTags.TARJETAS_DETALLE_FRAGMENT);
                 }else{
                     dialog = new ServiciosControlBloqueoTarjetaDesactivarDialog();
+                    dialog.setCancelable(false);
                     dialog.show(getSupportFragmentManager(), FragmentTags.TARJETAS_DETALLE_FRAGMENT);
                 }
                 break;
@@ -261,11 +374,13 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
                 adapterViewPagerInferior.setPages(3,new ReporteRoboExtravioFragment());
                 break;
             case 1:
+                adapterViewPagerInferior.setPages(3,new DetalleServiciosSaldosPagosFragment());
                 break;
             case 2:
                 adapterViewPagerInferior.setPages(3,new ControlLineaDeCreditoFragment());
                 break;
             case 3:
+                adapterViewPagerInferior.setPages(3,new DetalleServiciosNipMenuFragment());
                 break;
         }
     }
@@ -276,7 +391,137 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     @Override
     public void onAumentarLineaCredito() {
         dialog = new AvisoAumentoDeLineaCreditoAceptadaDialog();
+        dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(),FragmentTags.TARJETAS_DETALLE_FRAGMENT);
+    }
+
+    /**
+     * Implementecion de funcionalidad del menu en Detalle->Servicios->Servicios->Solicitud de Nip
+     * @param item Opcion del Menu Seleccionada
+     */
+    @Override
+    public void seleccionarOpcionMenu(MenuServiciosDTO item) {
+        switch(item.getId()){
+            case 0:
+                adapterViewPagerInferior.setPages(3,new DetalleServiciosSolicitarNipFragment());
+                break;
+            case 1:
+                adapterViewPagerInferior.setPages(3,new DetalleServiciosIngresarNipFragment());
+                break;
+        }
+    }
+
+    /**
+     * Implementacion de pantalla Detalle->Servicios->Servicios->Solicitar NIP->Envio de Nip para solicitar al banco nuevo nip.
+     */
+    @Override
+    public void solicitarNipABanco() {
+        dialog = new AsignacionDeNipDialog();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(),FragmentTags.TARJETAS_DETALLE_FRAGMENT);
+    }
+
+    /**
+     * Implementacion de boton para regresar de Solicitar Nip a Asignacion de Nip
+     */
+    @Override
+    public void regresarASubMenuServicios() {
+        adapterViewPagerInferior.setPages(3,new DetalleServiciosNipMenuFragment());
+    }
+
+    @Override
+    public void aceptarCambioDeNip() {
+
+    }
+
+    /**
+     * Implementacion de respuesta al Dialogo de Aviso al activar una Tarjeta desde Servicios-ActivarTarjeta
+     */
+    @Override
+    public void onAceptarActivarTarjetaAviso() {
+        int i = Integer.parseInt(holdTarjetaNumero);
+        dialog = DetalleServiciosActivarTarjetaActivadaDialog.newInstance(i);
+
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(),FragmentTags.TARJETAS_DETALLE_FRAGMENT);
+
+
+        holdTarjetaNumero = null;
+    }
+
+    /**
+     * Implementacion de segundo Dialogo de Aviso, donde explica que ya fue activada la tarjeta despues de aceptar en
+     * el dialogo anterior.
+     */
+    @Override
+    public void aceptarActivarTarjeta() {
+        Button button = (Button) holdView;
+        holdView = null;
+
+        button.setText(R.string.btnDesactivar);
+        button.setBackgroundColor(ContextCompat.getColor(this,R.color.red));
+    }
+
+    /**
+     * ControlLineaCreditoModificarLineaFragment Listener para ejecutar cuando se acepta la modificacion de la linea de credito seleccionada
+     */
+    @Override
+    public void onModificarLineaAceptar(String aumento) {
+        dialog = DetalleServiciosControlLineaConfirmarModificarLineaDialog.getInstance(aumento);
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(),FragmentTags.TARJETAS_DETALLE_FRAGMENT);
+    }
+
+    /**
+     * ControlLineaCreditoModificarLineaFragment Listener para regresar al control de lineas de credito.
+     */
+    @Override
+    public void onModificarLineaCancelar() {
+        adapterViewPagerInferior.setPages(3,new ControlLineaDeCreditoFragment());
+    }
+
+    /**
+     * DetalleServiciosControlLineaConfirmarModificarLineaDialog
+     */
+    @Override
+    public void onClickAceptarAumentoLinea() {
+        dialog = new DetalleServiciosControlLineaAvisoConfirmadoModificarLinea();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(),FragmentTags.TARJETAS_DETALLE_FRAGMENT);
+    }
+
+    /**
+     * DetalleServiciosControlLineaConfirmarModificarLineaDialog
+     */
+    @Override
+    public void onClickCancelarAumentoLinea() {
+
+    }
+
+    /**
+     * DetalleServiciosControlLineaAvisoConfirmadoModificarLinea
+     */
+    @Override
+    public void onConfirmadoModificacion() {
+        adapterViewPagerInferior.setPages(3,new ControlLineaDeCreditoFragment());
+    }
+
+    /**
+     * DetalleTransaccionesFragment Abre el menu de categorias una vez seleccionada la transacccion objetivo
+     */
+    @Override
+    public void onLongPressTransaccion(int position, TransaccionesAdapter adapter) {
+        drawerLayout.openDrawer(Gravity.RIGHT);
+        adapterPosition = position;
+        tAdapterHolder = adapter;
+    }
+
+    /**
+     * CategoriaCrearDialog
+     */
+    @Override
+    public void acepterCrearCategoria(int imagen, int imagenDrawable, String nombreCategoria) {
+        RealmAdministrator.getInstance(getBaseContext()).crearCategoria(imagen,imagenDrawable,nombreCategoria);
     }
 
     /**
@@ -339,7 +584,7 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
                 R.drawable.dollar_bill
                 ,R.drawable.notification
                 ,R.drawable.promociones
-                ,R.drawable.shopping_cart
+                ,R.drawable.settings
         };
 
         private final Context context;
@@ -445,6 +690,15 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
             case 1 :
                 adapterViewPagerInferior.setPages(3,new DetalleServiciosSubMenuFragment());
                 break;
+            case 2 :
+                adapterViewPagerInferior.setPages(3,new DetalleSeguimientoDeTarjetaFragment());
+                break;
+            case 3:
+                adapterViewPagerInferior.setPages(3,new DetalleServiciosProgramaLealtadFragment());
+                break;
+            case 4:
+                adapterViewPagerInferior.setPages(3, new DetalleServiciosActivarTarjetaFragment());
+                break;
         }
     }
 
@@ -452,5 +706,68 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    public class DrawerItemClickListener implements ListView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if((parent.getAdapter().getCount() -1) == position){
+                DialogCrearCategoriaImpl dialog = new DialogCrearCategoriaImpl(DetallesMisTarjetas.this);
+                dialog.setCancelable(false);
+                dialog.show();
+            }else{
+                ((TransaccionesObjectDrawer) tAdapterHolder.getItem(adapterPosition)).setColorCategoria(position+1);
+                tAdapterHolder.notifyDataSetChanged();
+                tAdapterHolder = null;
+                if (drawerLayout.isDrawerOpen(Gravity.RIGHT)){
+                    drawerLayout.closeDrawers();
+                }
+            }
+        }
+    }
+
+    class DialogCrearCategoriaImpl extends CategoriaCrearDialog {
+
+        public DialogCrearCategoriaImpl(Context context) {
+            super(context);
+        }
+
+        @Override
+        public void actualizarGrid() {
+            CategoriasDrawerAdapter adapter = (CategoriasDrawerAdapter)lstNavigationCategory.getAdapter();
+            categoriesImages = cargarInformacionMenuCategorias();
+            adapter.updateData(categoriesImages);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.btnAgregarTarjeta:
+                Intent i = new Intent(this,Categorias.class);
+                startActivity(i);
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        CategoriasDrawerAdapter adapter = (CategoriasDrawerAdapter)lstNavigationCategory.getAdapter();
+        categoriesImages = cargarInformacionMenuCategorias();
+        adapter.updateData(categoriesImages);
     }
 }

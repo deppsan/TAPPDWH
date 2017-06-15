@@ -1,5 +1,6 @@
 package tarjetas.dwh.com.tarjetas.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -25,15 +27,18 @@ import tarjetas.dwh.com.tarjetas.R;
 import tarjetas.dwh.com.tarjetas.adapter.TransaccionesAdapter;
 import tarjetas.dwh.com.tarjetas.adapter.drawer.TransaccionesObjectDrawer;
 import tarjetas.dwh.com.tarjetas.network.TarjetasApiClient;
+import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
 
 /**
  * Created by ricar on 13/02/2017.
  */
 
-public class DetalleTransaccionesFragment extends Fragment implements TarjetasApiClient.TarjetasApiTransaccionesListener, AdapterView.OnItemClickListener {
+public class DetalleTransaccionesFragment extends Fragment implements TarjetasApiClient.TarjetasApiTransaccionesListener, AdapterView.OnItemLongClickListener {
 
     private ListView lstTransacciones;
     private int idTarjeta;
+
+    private DetalleTransaccionesListener listener;
 
     @Nullable
     @Override
@@ -41,7 +46,7 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
         View v = inflater.inflate(R.layout.fragment_detalle_transacciones,container,false);
         lstTransacciones = (ListView) v.findViewById(R.id.lstTransacciones);
 
-        lstTransacciones.setOnItemClickListener(this);
+        lstTransacciones.setOnItemLongClickListener(this);
 
 
         TarjetasApiClient.getInstance().getTransaccionesTarjeta("",getContext(),this);
@@ -71,28 +76,29 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
                 TextView gasto = (TextView) view.findViewById(R.id.TransaccionGasto);
                 TextView puntos = (TextView) view.findViewById(R.id.TransaccionPuntos);
                 ImageView categoria = (ImageView) view.findViewById((R.id.imgCategoria));
-                int imagenFlag = R.drawable.flaggray;
 
                 fecha.setText(((TransaccionesObjectDrawer)saldo).getFechaTransaccion());
                 descripcion.setText(((TransaccionesObjectDrawer)saldo).getDetalleTransaccion());
                 gasto.setText(((TransaccionesObjectDrawer)saldo).getMontoTransaccion());
                 puntos.setText(((TransaccionesObjectDrawer)saldo).getPuntosTransaccion());
 
-                switch (((TransaccionesObjectDrawer)saldo).getColorCategoria()){
+                /*switch (((TransaccionesObjectDrawer)saldo).getColorCategoria()){
+                    case 0:
+                        imagenFlag = R.drawable.airport_black;
+                        break;
                     case 1:
-                        imagenFlag = R.drawable.flagblack;
+                        imagenFlag = R.drawable.shopping_cart_black;
                         break;
                     case 2:
-                        imagenFlag = R.drawable.flagblue;
+                        imagenFlag = R.drawable.home_black;
                         break;
                     case 3:
-                        imagenFlag = R.drawable.flagred;
+                        imagenFlag = R.drawable.property_black;
                         break;
-                    case 4:
-                        imagenFlag = R.drawable.flaggreen;
-                        break;
-                }
-                Picasso.with(getContext()).load(imagenFlag).into(categoria);
+                    default:
+                        imagenFlag = ;
+                }*/
+                Picasso.with(getContext()).load(RealmAdministrator.getInstance(getContext()).getDrawableByCategory(((TransaccionesObjectDrawer)saldo).getColorCategoria(),false)).into(categoria);
 
             }
         });
@@ -100,13 +106,32 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
     }
 
     @Override
-    public void onTransaccionesFalla() {
-    }
+    public void onTransaccionesFalla() {}
 
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getContext(), "porfavor funciona!!", Toast.LENGTH_SHORT).show();
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        listener.onLongPressTransaccion(position,(TransaccionesAdapter)parent.getAdapter());
+        return false;
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof DetalleTransaccionesListener) {
+            listener = (DetalleTransaccionesListener) context;
+        } else {
+            throw new IllegalArgumentException(context.toString() + "debe de implementar en onAttach");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null ;
+    }
+
+    public interface DetalleTransaccionesListener{
+        void onLongPressTransaccion(int position, TransaccionesAdapter adapter);
     }
 }

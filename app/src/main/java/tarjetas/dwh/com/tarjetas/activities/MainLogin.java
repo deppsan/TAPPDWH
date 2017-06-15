@@ -163,12 +163,12 @@ public class MainLogin extends AppCompatActivity implements PasswordFragment.Pas
 
     @Override
     public void onUsuarioCreado() {
-        UtilsSharedPreference.getInstance(this).setUserActive(true);
+        UtilsSharedPreference.getInstance(this).setUserActive(true,getBaseContext());
         replaceFragment(R.id.frameContent,new PasswordFragment(),FragmentTags.PASSWORD_FRAGMENT, FragmentTags.LOGIN_FORMULARIO_USUARIO_FRAGMENT);
     }
 
     @Override
     public void onUsuarioFalla() {
-
+        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
     }
 }

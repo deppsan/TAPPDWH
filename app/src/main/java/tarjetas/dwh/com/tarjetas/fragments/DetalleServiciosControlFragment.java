@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import tarjetas.dwh.com.tarjetas.R;
+import tarjetas.dwh.com.tarjetas.adapter.ServiciosControlAdapter;
 import tarjetas.dwh.com.tarjetas.adapter.TransaccionesAdapter;
 import tarjetas.dwh.com.tarjetas.adapter.drawer.MenuServiciosControlDrawerObject;
 
@@ -39,31 +40,41 @@ public class DetalleServiciosControlFragment extends Fragment implements View.On
 
         ArrayList<MenuServiciosControlDrawerObject> menu = new ArrayList<>();
 
-        menu.add(new MenuServiciosControlDrawerObject("Bloquar Tarjeta Temporalmente","Activar esta funcionalidad no permite hacer ningun tipo de cargo a la tarjeta",0));
-        menu.add(new MenuServiciosControlDrawerObject("Bloquar Trx Internacionales","Activar esta funcionalidad no aceptara ninguna actividad proveniente del extranjer, incluye cargos automaticos",1));
-        menu.add(new MenuServiciosControlDrawerObject("Bloquar Transacciones sin plastico","Activar esta funcionalidad no aceptara cargos provenientes de actividad online o telefonica donde no este presente la tarjeta",2));
-        menu.add(new MenuServiciosControlDrawerObject("Bloquear Transacciones en ATM","Activar esta funcionalidad no permitira el uso de la tarjeta en ATMs para obtener dinero",3));
-        menu.add(new MenuServiciosControlDrawerObject("Bloqueo de Cargos Periódicos","Activar essta funcionalidad no permitira los cargos recurrentes y automaticos hechos en la tarjeta",4));
+        menu.add(new MenuServiciosControlDrawerObject("Bloquar Tarjeta Temporalmente","Activar esta funcionalidad no permite hacer ningun tipo de cargo a la tarjeta",0,false));
+        menu.add(new MenuServiciosControlDrawerObject("Bloquar Trx Internacionales","Activar esta funcionalidad no aceptara ninguna actividad proveniente del extranjer, incluye cargos automaticos",1,false));
+        menu.add(new MenuServiciosControlDrawerObject("Bloquar Transacciones sin plastico","Activar esta funcionalidad no aceptara cargos provenientes de actividad online o telefonica donde no este presente la tarjeta",2,false));
+        menu.add(new MenuServiciosControlDrawerObject("Bloquear Transacciones en ATM","Activar esta funcionalidad no permitira el uso de la tarjeta en ATMs para obtener dinero",3,false));
+        menu.add(new MenuServiciosControlDrawerObject("Bloqueo de Cargos Periódicos","Activar essta funcionalidad no permitira los cargos recurrentes y automaticos hechos en la tarjeta",4,false));
 
 
+        lstMenuControl.setAdapter(new ServiciosControlAdapter(menu,R.layout.object_servicios_controles_list,getContext()) {
+           @Override
+           public void onEntradaSet(View v, ViewHolder mHolder) {
 
-        lstMenuControl.setAdapter(new TransaccionesAdapter(menu,R.layout.object_servicios_controles_list,getContext()) {
-            @Override
-            public void onEntrada(final Object menu, final View view) {
+               mHolder.txtTitulo = (TextView)  v.findViewById(R.id.txtItemControlCabecera);
+               mHolder.txtDescripcion = (TextView) v.findViewById(R.id.txtItemControlDescripcion);
+               mHolder.swtControl = (Switch) v.findViewById(R.id.swtServiciosControl);
 
-                TextView txtTitulo = (TextView) view.findViewById(R.id.txtItemControlCabecera);
-                TextView txtDescripcion = (TextView) view.findViewById(R.id.txtItemControlDescripcion);
-                Switch swtControl = (Switch) view.findViewById(R.id.swtServiciosControl);
+           }
 
-                txtTitulo.setText(((MenuServiciosControlDrawerObject)menu).getTxtTitulo());
-                txtDescripcion.setText(((MenuServiciosControlDrawerObject)menu).getTxtDescripcion());
-                swtControl.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onClickSeleccionarMenu(menu,view);
-                    }
-                });
-            }
+           @Override
+           public void onEntrada(final Object control, final ViewHolder mHolder, final int position) {
+
+               mHolder.txtTitulo.setText(((MenuServiciosControlDrawerObject)control).getTxtTitulo());
+               mHolder.txtDescripcion.setText(((MenuServiciosControlDrawerObject)control).getTxtDescripcion());
+               mHolder.swtControl.setChecked(((MenuServiciosControlDrawerObject)control).isActive());
+               mHolder.swtControl.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       if (mHolder.swtControl.isChecked()){
+                           ((MenuServiciosControlDrawerObject) control).setActive(true);
+                       }else{
+                           ((MenuServiciosControlDrawerObject) control).setActive(false);
+                       }
+                       listener.onClickSeleccionarMenu(control,v,position);
+                   }
+               });
+           }
         });
 
 
@@ -97,6 +108,6 @@ public class DetalleServiciosControlFragment extends Fragment implements View.On
 
     public interface DetalleServiciosControlListener{
         void onClickRegresar();
-        void onClickSeleccionarMenu(Object menu,View view);
+        void onClickSeleccionarMenu(Object menu,View view, int position);
     }
 }

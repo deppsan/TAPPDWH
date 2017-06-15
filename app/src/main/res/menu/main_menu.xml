@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_mis_tarjetas"
+            android:icon="@drawable/bankcard"
+            android:title="Mis Tarjetas"/>
+        <item
+            android:id="@+id/nav_promociones"
+            android:icon="@drawable/pricetag"
+            android:title="Promociones"/>
+        <item
+            android:id="@+id/nav_notificaciones"
+            android:icon="@drawable/appointmentremainder"
+            android:title="Notificaciones"/>
+        <item
+            android:id="@+id/nav_buscar_sucursales"
+            android:icon="@drawable/markfilled"
+            android:title="Buscar Sucursales"/>
+        <item
+            android:id="@+id/nav_marcame"
+            android:icon="@drawable/phone"
+            android:title="Marcame"/>
+    </group>
+    <item android:title="Otros">
+        <menu>
+            <item
+                android:id="@+id/nav_ayuda"
+                android:icon="@drawable/questionmark"
+                android:title="Ayuda"/>
+            <item
+                android:id="@+id/nav_ajustes"
+                android:icon="@drawable/settingsfill"
+                android:title="Ajustes"/>
+            <item
+                android:id="@+id/nav_salir"
+                android:icon="@drawable/logout"
+                android:title="Salir"/>
+
+        </menu>
+    </item>
+</menu>

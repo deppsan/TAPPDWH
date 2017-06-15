@@ -250,14 +250,14 @@ public class TarjetasApiClient {
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",2));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",3));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",4));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",2));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",3));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",1));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",2));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",3));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",4));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",1));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",2));
         transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",3));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",4));
         listener.onTransaccionesRecividas(transacciones);
     }
 

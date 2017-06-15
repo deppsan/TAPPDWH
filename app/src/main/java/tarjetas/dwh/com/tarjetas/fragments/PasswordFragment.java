@@ -1,6 +1,8 @@
 package tarjetas.dwh.com.tarjetas.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +19,7 @@ import com.google.gson.GsonBuilder;
 
 import tarjetas.dwh.com.tarjetas.R;
 import tarjetas.dwh.com.tarjetas.network.TarjetasApiClient;
+import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
 
 /**
  * Created by ricar on 01/12/2016.
@@ -25,6 +29,7 @@ public class PasswordFragment extends Fragment implements View.OnClickListener, 
     private TextView txUser;
     private Button btn;
     private Context context;
+    private ImageView notificacion;
 
     PasswordFragmentAuthListener callBackAuth;
 
@@ -37,8 +42,12 @@ public class PasswordFragment extends Fragment implements View.OnClickListener, 
          context= v.getContext();
          txUser = (TextView) v.findViewById(R.id.txtUsuario);
          btn    = (Button) v.findViewById(R.id.btnContinuar);
+        notificacion = (ImageView) v.findViewById(R.id.imgNotification);
+
+
 
          btn.setOnClickListener(this);
+
 
          return v;
      }

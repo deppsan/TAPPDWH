@@ -48,7 +48,8 @@
                 android:textSize="15dp"
                 android:hint="@string/hintNombreUsuario"
                 android:id="@+id/txtNombreUsuario"
-                android:layout_below="@id/lblNombre"/>
+                android:layout_below="@id/lblNombre"
+                android:inputType="textCapSentences"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

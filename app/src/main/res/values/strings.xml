@@ -1,10 +1,13 @@
 <resources>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut</string>
+
     <string name="app_name">Tarjetas_App</string>
     <string name="mensaje_login">Ingresa a:</string>
     <string name="banco_banorte">Tarjetas Banorte</string>
     <string name="Usuario_placeholder">Usuario</string>
     <string name="Password_Placeholder">Contraseña</string>
     <string name="button_login1">Continuar</string>
+    <string name="btn_guardar">Guardar</string>
     <string name="etiqueta_notificaciones">NOTIFICACIONES</string>
     <string name="mensaje_password">Ingresa tu Clave:</string>
     <string name="saludo">Saludos</string>
@@ -71,4 +74,35 @@
     <string name="mensajeDialogAumentarLinea2">, ¿Esta de acuerdo en esta acción?</string>
     <string name="mensajeAumentoDeLineaAceptada">Su solicitud ha sido recivida en breve le enviaremos una respuesta a su petición.</string>
 
+    <string name="btnSolicitarNip">Obtener NIP</string>
+    <string name="dialogTitleSolicitarNip">Asignación de NIP</string>
+    <string name="dialogMensajeSolicitarNip">Su NIP llegara a la sección de Notificaciones, le recordamos que este mes no estamos cobrando comisión por dispisición de efectivo.</string>
+    <string name="lblIngresarNip">Por favor tecle su NIP de 4 dígitos, no consecutivos, no repetidos los cuatro numeros.</string>
+
+
+    <string name="btnActivarDesdeSEguimiento">¿Quieres activarla ahora?, da click aquí.</string>
+    <string name="btnActivar">Activar</string>
+    <string name="btnDesactivar">Desactivar</string>
+    <string name="dialogMensajeActivarTarjeta">¿Desea activar esta tarjeta?</string>
+    <string name="dialogTituloActivaciones">Activaciones</string>
+    <string name="dialogMensajeActivaciones1">Felicidades !! Su tarjeta terminacion</string>
+    <string name="dialogMensajeActivaciones2">ha sido activada, ahora puede gozar de los múltiples beneficios que le brinda su tarjeta</string>
+    <string name="btnAplicar">Aplicar</string>
+
+    <string name="dialogTituloConfirmarAumetarLinea">Estas seguro de modificar la línea de crédito de tu tarjeta adicional</string>
+    <string name="dialogTituloAumentarLinea">Línea de crédito actualizada</string>
+    <string name="dialogMensajeAumtentarLinea">Su solicitud ha sido recibida en brebe le enviaremos una respuesta a su petición.</string>
+
+    <string name="tool_bar_agregar">Agregar Tarjeta</string>
+
+    <string name="lblSeguimientoTitulo">Mensajería</string>
+
+    <string name="hintNombreCategoria">Nombre de la Categoria</string>
+    <string name="dialogTituloSeleccionarImagenCategoria">Selecciona una imagen:</string>
+
+    <string-array name="spn_array">
+        <item>Mensual</item>
+        <item>Semanal</item>
+        <item>Quincenal</item>
+    </string-array>
 </resources>

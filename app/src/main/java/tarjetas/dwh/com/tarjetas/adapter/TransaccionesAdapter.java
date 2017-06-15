@@ -25,6 +25,11 @@ public abstract class TransaccionesAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    public void actualizarDatos(ArrayList<?> transacciones){
+        this.transacciones = transacciones;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return transacciones.size();
@@ -52,7 +57,7 @@ public abstract class TransaccionesAdapter extends BaseAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return false;
+        return true;
     }
 
     public abstract void onEntrada(Object saldo, View view);
