@@ -14,31 +14,56 @@
             android:id="@+id/tool_bar_Tarjetas_detalle"
             layout="@layout/tool_bar" />
     </LinearLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v4.view.ViewPager
-            android:layout_height="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="55dp"
-            android:layout_marginBottom="300dp"
-            android:paddingTop="5dp"
-            android:id="@+id/content_tarjetas_detail_superior" />
-        <com.astuetz.PagerSlidingTabStrip
-            android:id="@+id/pager_tabs"
-            android:layout_height="60dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:id="@+id/image_tarjeta_one"/>
+            <android.support.v4.view.ViewPager
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:paddingTop="5dp"
+                android:id="@+id/content_tarjetas_detail_superior"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="266dp"
-            app:pstsShouldExpand="true"
-            app:pstsTextAllCaps="true"/>
-        <tarjetas.dwh.com.tarjetas.utilities.custom.customViewPager
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:layout_marginTop="326dp"
-            android:id="@+id/content_tarjetas_detail_inferior">
-        </tarjetas.dwh.com.tarjetas.utilities.custom.customViewPager>
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.3">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:gravity="right">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/solapa"
+                    android:id="@+id/imgExpandir"/>
+            </LinearLayout>
+            <com.astuetz.PagerSlidingTabStrip
+                android:id="@+id/pager_tabs"
+                android:layout_height="60dip"
+                android:layout_width="match_parent"
+                app:pstsShouldExpand="true"
+                app:pstsTextAllCaps="true"/>
+            <tarjetas.dwh.com.tarjetas.utilities.custom.customViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:id="@+id/content_tarjetas_detail_inferior"/>
+        </LinearLayout>
+    </LinearLayout>
     <ListView
         android:layout_width="80dp"
         android:layout_height="match_parent"

@@ -33,10 +33,10 @@
         android:drawableLeft="@drawable/person_1"
         android:drawablePadding="10dp"
         android:hint="@string/Usuario_placeholder"
+        android:text="a"
         android:id="@+id/txtUsuario"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="user"
         android:inputType="text"/>
     <Button
         android:layout_width="match_parent"

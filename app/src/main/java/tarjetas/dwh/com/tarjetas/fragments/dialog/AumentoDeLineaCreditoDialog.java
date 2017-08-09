@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 
 import tarjetas.dwh.com.tarjetas.R;
+import tarjetas.dwh.com.tarjetas.utilities.FormatCurrency;
 
 /**
  * Created by ricar on 16/03/2017.
@@ -38,7 +39,7 @@ public class AumentoDeLineaCreditoDialog extends DialogFragment {
         String text1 = getContext().getString(R.string.mensajeDialogAumentarLinea1);
         String text2 = getContext().getString(R.string.mensajeDialogAumentarLinea2);
 
-        builder.setMessage(text1 + " " + maxLineaCredito+ " " + text2).setTitle(R.string.titleDialogAumentarLinea)
+        builder.setMessage(text1 + " " + FormatCurrency.getFormatCurrency(maxLineaCredito)+ " " + text2).setTitle(R.string.titleDialogAumentarLinea)
                 .setPositiveButton(R.string.btnConfirmar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

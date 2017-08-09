@@ -5,18 +5,29 @@ package tarjetas.dwh.com.tarjetas.adapter.drawer;
  */
 
 public class TransaccionesObjectDrawer {
+
+    private int id;
     private String fechaTransaccion;
     private String detalleTransaccion;
-    private String montoTransaccion;
+    private double montoTransaccion;
     private String puntosTransaccion;
     private int colorCategoria;
 
-    public TransaccionesObjectDrawer(String fechaTransaccion, String detalleTransaccion, String montoTransaccion, String puntosTransaccion, int colorCategoria) {
+    public TransaccionesObjectDrawer(int id,String fechaTransaccion, String detalleTransaccion, double montoTransaccion, String puntosTransaccion, int colorCategoria) {
+        this.id = id;
         this.fechaTransaccion = fechaTransaccion;
         this.detalleTransaccion = detalleTransaccion;
         this.montoTransaccion = montoTransaccion;
         this.puntosTransaccion = puntosTransaccion;
         this.colorCategoria = colorCategoria;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFechaTransaccion() {
@@ -35,11 +46,11 @@ public class TransaccionesObjectDrawer {
         this.detalleTransaccion = detalleTransaccion;
     }
 
-    public String getMontoTransaccion() {
+    public double getMontoTransaccion() {
         return montoTransaccion;
     }
 
-    public void setMontoTransaccion(String montoTransaccion) {
+    public void setMontoTransaccion(double montoTransaccion) {
         this.montoTransaccion = montoTransaccion;
     }
 

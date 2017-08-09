@@ -61,11 +61,10 @@ public class FormularioUsuarioFragment extends Fragment implements View.OnClickL
         switch (v.getId()){
             case R.id.btnCrearUsuario:
                 if (validaCampos()){
-                    Toast.makeText(getContext(), "Campos correcto", Toast.LENGTH_SHORT).show();
                     RealmAdministrator.getInstance(getContext()).setUsuario(txtNombreusuario.getText().toString(),txtContraseña.getText().toString());
                     listener.onUsuarioCreado();
                 }else {
-                    Toast.makeText(getContext(), "Campos Incorrectos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Uno o más campos necesitan ser llenados", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

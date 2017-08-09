@@ -78,4 +78,9 @@ public abstract class ServiciosControlAdapter extends BaseAdapter {
         public TextView txtDescripcion;
         public Switch swtControl;
     }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return true;
+    }
 }

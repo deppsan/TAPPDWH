@@ -45,7 +45,7 @@ public class DetalleServiciosNipMenuFragment extends Fragment implements Adapter
 
         lstMenu.setAdapter(new TransaccionesAdapter(items,R.layout.object_detalle_servicios_servicios_nip_menu_list,getContext()) {
             @Override
-            public void onEntrada(Object items, View view) {
+            public void onEntrada(Object items, View view, int position) {
                 MenuServiciosDTO item = (MenuServiciosDTO) items;
 
                 TextView  txt = (TextView) view.findViewById(R.id.txtMenuDescripcion);

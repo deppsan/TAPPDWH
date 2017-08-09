@@ -49,7 +49,7 @@ public class MainPage extends BaseActivity implements TarjetasListaFragment.Tarj
 
     @Override
     public void onGotoTarjetasDetalle(TarjetaListaObject tarjeta) {
-        Intent intent = new Intent(this,DetallesMisTarjetas.class);
+        Intent intent = new Intent(this,DetallesMisTarjetasUno.class);
         intent.putExtra("idTarjeta",tarjeta.getId_c());
         startActivity(intent);
     }
@@ -106,8 +106,9 @@ public class MainPage extends BaseActivity implements TarjetasListaFragment.Tarj
     public void aceptarAccion() {
         enEsperaCodigoSeguridad();
     }
+
     private void enEsperaCodigoSeguridad(){
-        UtilsSharedPreference.getInstance(this).setEsperaCodigo(true);
+//        UtilsSharedPreference.getInstance(this).setEsperaCodigo(true);
         fm.popBackStack();
         replaceFragment(R.id.content_frame, new CodigoDeActivacionFragment(),FragmentTags.LOGIN_CODIGO_SEGURIDAD_FRAGMENT,FragmentTags.TARJETAS_LISTA_FRAGMENT);
     }

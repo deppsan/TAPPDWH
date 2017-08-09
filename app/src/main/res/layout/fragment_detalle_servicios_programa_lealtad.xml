@@ -3,39 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_list"
-        android:orientation="horizontal"
-        android:id="@+id/btnRegresarMenuServicios">
-        <ImageView
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/back"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/RegresarButton"
-            android:gravity="center_vertical"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray"></LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sugerencia de recompensas"
-        android:textAlignment="center"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lstProgramaLealtad"></ListView>
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -49,5 +21,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdf"/>
-    </LinearLayout>
+    </LinearLayout>-->
 </LinearLayout>

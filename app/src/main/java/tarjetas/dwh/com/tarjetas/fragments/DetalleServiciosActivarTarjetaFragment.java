@@ -34,7 +34,7 @@ public class DetalleServiciosActivarTarjetaFragment extends Fragment implements 
         View v  = inflater.inflate(R.layout.fragment_detalle_servicios_lista_base,container,false);
 
         lstTarjetas = (ListView) v.findViewById(R.id.lstServiciosMenuInterno);
-        View btnRegresar = v.findViewById(R.id.btnRegresarMenuServicios);
+        View btnRegresar = inflater.inflate(R.layout.object_button_regresar_,container,false);
 
         btnRegresar.setOnClickListener(this);
 
@@ -45,7 +45,7 @@ public class DetalleServiciosActivarTarjetaFragment extends Fragment implements 
 
         lstTarjetas.setAdapter(new TransaccionesAdapter(data,R.layout.object_detalle_activar_tarjeta_lista,getContext()) {
             @Override
-            public void onEntrada(Object tarjetas, View view) {
+            public void onEntrada(Object tarjetas, View view, int position) {
                 TextView tipoTarjeta = (TextView) view.findViewById(R.id.lblTipoTarjeta);
                 TextView tarjetaNum = (TextView) view.findViewById(R.id.lblActivarTarjetaNumero);
                 Button btnActivarTarjeta = (Button) view.findViewById(R.id.btnActivarDesactivarTarjeta);
@@ -78,6 +78,8 @@ public class DetalleServiciosActivarTarjetaFragment extends Fragment implements 
             }
         });
 
+        lstTarjetas.addHeaderView(btnRegresar);
+
 
         return v ;
     }
@@ -85,7 +87,7 @@ public class DetalleServiciosActivarTarjetaFragment extends Fragment implements 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnRegresarMenuServicios:
+            case R.id.btnObjectRegresar:
                     listener.onClickRegresar();
                 break;
         }

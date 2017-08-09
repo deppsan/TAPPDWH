@@ -3,24 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_list"
-        android:orientation="horizontal"
-        android:id="@+id/btnRegresarMenuServicios">
-        <ImageView
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/back"/>
-        <TextView
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/RegresarButton"
-            android:gravity="center_vertical"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Menu"/>
-    </LinearLayout>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lstServiciosMenuInterno"></ListView>
+            android:id="@+id/lstServiciosMenuInterno"
+            android:choiceMode="singleChoice"></ListView>
 </LinearLayout>

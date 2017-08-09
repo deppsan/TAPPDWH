@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
         android:layout_width="190dp"
         android:layout_height="60dp"
         android:id="@+id/seccionTransacciones"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin">
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:weightSum="3"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
             android:text="asdf"
             android:id="@+id/horaTransaccion"
-            android:gravity="bottom"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_default_size"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:text="asdf"
             android:id="@+id/TiendaTransaccion"
             android:layout_below="@id/horaTransaccion"
-            android:gravity="top"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_default_size"
             android:textColor="@color/black"/>
-    </RelativeLayout>
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="100dp"
         android:layout_height="60dp"
@@ -35,6 +42,7 @@
             android:text="asdf"
             android:id="@+id/TransaccionGasto"
             android:gravity="bottom"
+            android:textSize="@dimen/text_default_size"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="match_parent"
@@ -43,6 +51,7 @@
             android:id="@+id/TransaccionPuntos"
             android:layout_below="@id/TransaccionGasto"
             android:gravity="top"
+            android:textSize="@dimen/text_default_size"
             android:textColor="@color/black"/>
     </RelativeLayout>
     <RelativeLayout
@@ -57,4 +66,4 @@
             android:src="@drawable/flagblack"
             android:id="@+id/imgCategoria" />
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

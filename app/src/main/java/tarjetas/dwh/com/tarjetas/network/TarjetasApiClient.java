@@ -18,6 +18,7 @@ import tarjetas.dwh.com.tarjetas.DTO.TransaccionesDTO;
 import tarjetas.dwh.com.tarjetas.DTO.authDTO;
 import tarjetas.dwh.com.tarjetas.DTO.menuItemDTO;
 import tarjetas.dwh.com.tarjetas.DTO.usuarioDTO;
+import tarjetas.dwh.com.tarjetas.model.Transacciones;
 import tarjetas.dwh.com.tarjetas.model.Usuario;
 import tarjetas.dwh.com.tarjetas.network.conection.conexionHTTP;
 import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
@@ -246,18 +247,25 @@ public class TarjetasApiClient {
 
     public void getTransaccionesTarjeta(String token,Context context, final TarjetasApiTransaccionesListener listener){
         ArrayList<TransaccionesDTO> transacciones = new ArrayList<TransaccionesDTO>();
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",1));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",2));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",3));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",4));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",1));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",2));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",3));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",4));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",1));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",2));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",3));
-        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","$600.00","+20 Puntos",4));
+        /*transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,1));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,2));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,3));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,4));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,1));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,2));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,3));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,4));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,1));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,2));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,3));
+        transacciones.add(new TransaccionesDTO("2016-08-01 08:00:00","Computer.com","+20 Puntos",600,4));*/
+
+        ArrayList<Transacciones> t = RealmAdministrator.getInstance(context).getAllTransacciones();
+
+        for (Transacciones t1 : t){
+            transacciones.add(new TransaccionesDTO(t1.getId(),t1.getFecha(),t1.getDetalle(),t1.getPuntos(),t1.getValor(),t1.getCategoria()));
+        }
+
         listener.onTransaccionesRecividas(transacciones);
     }
 

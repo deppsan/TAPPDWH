@@ -27,6 +27,7 @@ import tarjetas.dwh.com.tarjetas.R;
 import tarjetas.dwh.com.tarjetas.adapter.TransaccionesAdapter;
 import tarjetas.dwh.com.tarjetas.adapter.drawer.TransaccionesObjectDrawer;
 import tarjetas.dwh.com.tarjetas.network.TarjetasApiClient;
+import tarjetas.dwh.com.tarjetas.utilities.FormatCurrency;
 import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
 
 /**
@@ -66,11 +67,11 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
         ArrayList<TransaccionesObjectDrawer> data = new ArrayList<TransaccionesObjectDrawer>();
 
         for (TransaccionesDTO t : transacciones){
-            data.add(new TransaccionesObjectDrawer(t.getFechaTransaccion(),t.getDetalleTransaccion(),t.getValorTransaccion(),t.getPuntos(),t.getCategoria()));
+            data.add(new TransaccionesObjectDrawer(t.getId(),t.getFechaTransaccion(),t.getDetalleTransaccion(),t.getValorTransaccion(),t.getPuntos(),t.getCategoria()));
         }
         lstTransacciones.setAdapter(new TransaccionesAdapter(data,R.layout.object_transacciones_listado,getActivity().getApplicationContext()) {
             @Override
-            public void onEntrada(Object saldo, View view) {
+            public void onEntrada(Object saldo, View view, int position) {
                 TextView fecha = (TextView) view.findViewById(R.id.horaTransaccion);
                 TextView descripcion = (TextView) view.findViewById(R.id.TiendaTransaccion);
                 TextView gasto = (TextView) view.findViewById(R.id.TransaccionGasto);
@@ -79,25 +80,9 @@ public class DetalleTransaccionesFragment extends Fragment implements TarjetasAp
 
                 fecha.setText(((TransaccionesObjectDrawer)saldo).getFechaTransaccion());
                 descripcion.setText(((TransaccionesObjectDrawer)saldo).getDetalleTransaccion());
-                gasto.setText(((TransaccionesObjectDrawer)saldo).getMontoTransaccion());
+                gasto.setText(FormatCurrency.getFormatCurrency(((TransaccionesObjectDrawer)saldo).getMontoTransaccion()));
                 puntos.setText(((TransaccionesObjectDrawer)saldo).getPuntosTransaccion());
 
-                /*switch (((TransaccionesObjectDrawer)saldo).getColorCategoria()){
-                    case 0:
-                        imagenFlag = R.drawable.airport_black;
-                        break;
-                    case 1:
-                        imagenFlag = R.drawable.shopping_cart_black;
-                        break;
-                    case 2:
-                        imagenFlag = R.drawable.home_black;
-                        break;
-                    case 3:
-                        imagenFlag = R.drawable.property_black;
-                        break;
-                    default:
-                        imagenFlag = ;
-                }*/
                 Picasso.with(getContext()).load(RealmAdministrator.getInstance(getContext()).getDrawableByCategory(((TransaccionesObjectDrawer)saldo).getColorCategoria(),false)).into(categoria);
 
             }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/height_list"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin">
         <TextView
@@ -12,6 +12,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:id="@+id/lblDetallesNotificaciones"
+            android:textSize="@dimen/text_default_size"
             android:textColor="@color/black"/>
     </RelativeLayout>
 </LinearLayout>

@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import tarjetas.dwh.com.tarjetas.utilities.custom.CircleFillView;
+
 /**
  * Created by ricar on 16/05/2017.
  */
@@ -83,7 +85,8 @@ public abstract class CategoriasAdapter extends BaseAdapter {
 
     public class ViewHolder{
         public TextView montoActual;
-        public ImageView imageView,imgEditar,imgGrafica;
+        public ImageView imageView,imgEditar,imgGrafica,imgEliminar;
         public TextView categoriaNombre;
+        public CircleFillView circleFillView;
     }
 }

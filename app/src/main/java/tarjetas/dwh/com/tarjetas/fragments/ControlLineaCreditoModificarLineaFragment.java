@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import tarjetas.dwh.com.tarjetas.R;
+import tarjetas.dwh.com.tarjetas.utilities.FormatCurrency;
 
 /**
  * Created by ricar on 19/04/2017.
@@ -45,10 +46,10 @@ public class ControlLineaCreditoModificarLineaFragment extends Fragment implemen
         btnRegresar.setOnClickListener(this);
 
         ArrayList<itemLista> datos = new ArrayList<>();
-        datos.add(new itemLista("Línea Titual Total","$50,000.00"));
+        datos.add(new itemLista("Línea Titual Total", FormatCurrency.getFormatCurrency(50000.00)));
         datos.add(new itemLista("Tarjeta Adi. 1 7890",""));
         datos.add(new itemLista("Nombre de la Tarjeta Adicional",""));
-        datos.add(new itemLista("Línea Actual","$50,000.00"));
+        datos.add(new itemLista("Línea Actual",FormatCurrency.getFormatCurrency(50000.00)));
         datos.add(new itemLista("Línea Nueva",""));
 
 

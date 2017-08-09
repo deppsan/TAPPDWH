@@ -87,6 +87,8 @@ public class UtilsSharedPreference {
     public static void setUserActive(boolean status,Context context){
 
         RealmAdministrator.getInstance(context).crearCategoriasBase();
+        RealmAdministrator.getInstance(context).crearTransccionesDommy();
+        RealmAdministrator.getInstance(context).createProductosLealtadBase();
         editor.putBoolean("isUserActive",status);
         editor.commit();
     }

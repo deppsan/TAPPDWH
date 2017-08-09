@@ -3,8 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/btnAgregarTarjeta"
+    <!--<item android:id="@+id/btnAgregarTarjeta"
         android:title="@string/tool_bar_agregar"
         android:icon="@drawable/plus_100"
-        app:showAsAction="always"></item>
+        app:showAsAction="always"></item>-->
 </menu>

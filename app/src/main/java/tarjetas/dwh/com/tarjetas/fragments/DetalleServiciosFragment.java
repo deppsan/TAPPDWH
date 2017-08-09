@@ -53,7 +53,7 @@ public class DetalleServiciosFragment extends Fragment{
 
         lstMenuServiciosPrincipal.setAdapter(new TransaccionesAdapter(datos,R.layout.object_servicios_menu_list,getContext()) {
             @Override
-            public void onEntrada( final Object menu, View view) {
+            public void onEntrada( final Object menu, View view, int position) {
                 ImageView img = (ImageView) view.findViewById(R.id.imgServiciosMenu);
                 TextView text = (TextView) view.findViewById(R.id.lblServiciosMenu);
 

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import tarjetas.dwh.com.tarjetas.R;
 import tarjetas.dwh.com.tarjetas.adapter.TransaccionesAdapter;
 import tarjetas.dwh.com.tarjetas.model.Tarjeta;
+import tarjetas.dwh.com.tarjetas.utilities.FormatCurrency;
 
 /**
  * Created by ricar on 15/03/2017.
@@ -29,6 +30,7 @@ public class ControlLineaDeCreditoFragment extends Fragment implements AdapterVi
     private View btnRegresar;
     private ListView lstControlLineaCredito;
     private TextView lblTotalLineaCredito;
+    private View ViewTitular;
 
     private double totalLineaCredito;
     private ArrayList<Double> lineasAmount;
@@ -38,9 +40,12 @@ public class ControlLineaDeCreditoFragment extends Fragment implements AdapterVi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_detalle_control_linea_credito,container,false);
         
-        btnRegresar = (View) v.findViewById(R.id.btnRegresarMenuServicios);
+        btnRegresar = inflater.inflate(R.layout.object_button_regresar_,container,false);
         lstControlLineaCredito = (ListView) v.findViewById(R.id.lstControlLineaCredito);
-        lblTotalLineaCredito = (TextView) v.findViewById(R.id.lblLineaTitularTotal);
+
+
+        ViewTitular = inflater.inflate(R.layout.object_control_linea_credito_tarjeta_titular,null,false);
+        lblTotalLineaCredito = (TextView) ViewTitular.findViewById(R.id.lblLineaTitularTotal);
 
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,11 +67,11 @@ public class ControlLineaDeCreditoFragment extends Fragment implements AdapterVi
         }
 
 
-        lblTotalLineaCredito.setText(String.valueOf(totalLineaCredito));
+        lblTotalLineaCredito.setText(FormatCurrency.getFormatCurrency(totalLineaCredito));
 
         lstControlLineaCredito.setAdapter(new TransaccionesAdapter(tarjetasLineases,R.layout.object_detalle_control_linea_credito_list,getContext()) {
             @Override
-            public void onEntrada(Object Lineas, View view) {
+            public void onEntrada(Object Lineas, View view, int position) {
                 final TarjetasLineas linea = (TarjetasLineas) Lineas;
 
                 TextView txtTipoLinea = (TextView) view.findViewById(R.id.lblTipoTarjeta);
@@ -81,7 +86,7 @@ public class ControlLineaDeCreditoFragment extends Fragment implements AdapterVi
 
                 txtNumTarjeta.setText(String.valueOf(linea.getNumTarjeta()));
 
-                txtLimiteCredito.setText(String.valueOf(linea.getLimiteLinea()));
+                txtLimiteCredito.setText(FormatCurrency.getFormatCurrency(linea.getLimiteLinea()));
 
                 TextView btnModificarLinea  = (TextView) view.findViewById(R.id.btnModificarLinea);
                 btnModificarLinea.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +98,11 @@ public class ControlLineaDeCreditoFragment extends Fragment implements AdapterVi
             }
         });
         View footer = inflater.inflate(R.layout.object_control_linea_credito_final,null,false);
+
+        lstControlLineaCredito.addHeaderView(btnRegresar);
+        lstControlLineaCredito.addHeaderView(ViewTitular);
         lstControlLineaCredito.addFooterView(footer);
+
         lstControlLineaCredito.setOnItemClickListener(this);
 
         return v;

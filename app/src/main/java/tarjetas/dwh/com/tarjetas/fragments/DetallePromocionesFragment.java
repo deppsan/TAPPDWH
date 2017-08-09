@@ -29,7 +29,7 @@ public class DetallePromocionesFragment extends Fragment implements TarjetasApiC
 
     private ListView lstPromociones;
     private int idTarjeta;
-        
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,7 +59,6 @@ public class DetallePromocionesFragment extends Fragment implements TarjetasApiC
             public void onEntrada(Object promocione, View view) {
                 ImageView imgTienda = (ImageView) view.findViewById(R.id.imgPromociones);
                 TextView txtDescripcion = (TextView) view.findViewById(R.id.lblPromociones);
-                ImageView imgTipo = (ImageView) view.findViewById(R.id.imgPromocionesTipo);
 
 
                 Picasso picasso = Picasso.with(getContext());
@@ -78,19 +77,6 @@ public class DetallePromocionesFragment extends Fragment implements TarjetasApiC
 
                 picasso.load(imagenTipo).placeholder(R.drawable.markfilled).into(imgTienda);
                 txtDescripcion.setText(((PromocionesDTO)promocione).getDescripcion());
-
-                switch (((PromocionesDTO)promocione).getImgTipo()){
-                    case 1:
-                        imagenTipo = R.drawable.shopping_bag;
-                        break;
-                    case 2:
-                        imagenTipo = R.drawable.plane;
-                        break;
-                    case 3:
-                        imagenTipo = R.drawable.fork;
-                }
-
-                picasso.load(imagenTipo).placeholder(R.drawable.markfilled).into(imgTipo);
             }
         });
     }

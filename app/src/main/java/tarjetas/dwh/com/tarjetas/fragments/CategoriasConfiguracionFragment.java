@@ -6,8 +6,13 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.renderscript.Double2;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,6 +29,7 @@ import tarjetas.dwh.com.tarjetas.DTO.Categoria;
 import tarjetas.dwh.com.tarjetas.R;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.CategoriaCambiarImagenDialog;
 import tarjetas.dwh.com.tarjetas.model.Categorias;
+import tarjetas.dwh.com.tarjetas.utilities.FormatCurrency;
 import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
 
 /**
@@ -35,10 +41,11 @@ public class CategoriasConfiguracionFragment extends Fragment implements View.On
 
     CategoriasConfiguracionFragmentListener listener;
     Button btnGuardarModificacionesCategoria;
-    ImageView imgCategoria;
-    EditText txtCategoriaNombreConfiguracion,txtCategoriaMontoLimiteConfiguracion,hintCategoriaMontoLimiteConfiguracion;
+    FloatingActionButton imgCategoria;
+    EditText txtCategoriaNombreConfiguracion,txtCategoriaMontoLimiteConfiguracion;
     Spinner spn_CicloLimiteConfiguracion;
     Categorias categoria;
+    Toolbar detail_toolbar;
     int hImage, hImageDrawer;
 
     int idCategoriaSeleccionada;
@@ -48,14 +55,16 @@ public class CategoriasConfiguracionFragment extends Fragment implements View.On
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_categorias_configurar,container,false);
+        View v = inflater.inflate(R.layout.fragment_categorias_configurar_1,container,false);
 
         btnGuardarModificacionesCategoria = (Button) v.findViewById(R.id.btnGuardarModificacionesCategoria);
-        imgCategoria = (ImageView) v.findViewById(R.id.imbCategoriaConfiguracion);
-        hintCategoriaMontoLimiteConfiguracion = (EditText) v.findViewById(R.id.hintCategoriaMontoLimiteConfiguracion);
+        imgCategoria = (FloatingActionButton) v.findViewById(R.id.imbCategoriaConfiguracion);
         txtCategoriaMontoLimiteConfiguracion = (EditText) v.findViewById(R.id.txtCategoriaMontoLimiteConfiguracion);
         txtCategoriaNombreConfiguracion = (EditText) v.findViewById(R.id.txtCategoriaNombreConfiguracion);
         spn_CicloLimiteConfiguracion = (Spinner) v.findViewById(R.id.spn_CicloLimiteConfiguracion);
+        detail_toolbar = (Toolbar) v.findViewById(R.id.detail_toolbar);
+
+
 
 
         btnGuardarModificacionesCategoria.setOnClickListener(this);
@@ -69,13 +78,10 @@ public class CategoriasConfiguracionFragment extends Fragment implements View.On
         txtCategoriaMontoLimiteConfiguracion.setText(Double.toString(categoria.getCapacidad()));
         txtCategoriaNombreConfiguracion.setText(categoria.getNombre());
 
-        Resources res = getResources();
-        String[] recurrence = res.getStringArray(R.array.spn_array);
-
-        hintCategoriaMontoLimiteConfiguracion.setHint(recurrence[categoria.getRecurrence()]);
         spn_CicloLimiteConfiguracion.setSelection(categoria.getRecurrence());
 
-
+        detail_toolbar.setTitle("Configuración de Categoria");
+        detail_toolbar.setTitleTextColor(ContextCompat.getColor(getContext(),R.color.white));
 
         return v;
     }
@@ -137,5 +143,10 @@ public class CategoriasConfiguracionFragment extends Fragment implements View.On
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         idCategoriaSeleccionada = getArguments().getInt("idCategoria",0);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_configuracion_categoria,menu);
     }
 }

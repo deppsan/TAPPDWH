@@ -1,48 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="70dp"
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_weight="3"
+        android:src="@drawable/liverpool_face"
+        android:id="@+id/imgPromociones"/>
     <LinearLayout
-        android:layout_width="82dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:id="@+id/frmImagenPromocion"
-        android:paddingLeft="@dimen/activity_horizontal_margin">
-        <ImageView
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/imgPromociones"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/frmImagenPromocion"
-        android:layout_toRightOf="@+id/frmImagenPromocion"
-        android:id="@+id/frmTextoPromocion">
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1">
         <TextView
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:id="@+id/lblPromociones"
             android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_toEndOf="@id/frmTextoPromocion"
-        android:layout_toRightOf="@id/frmTextoPromocion"
-        android:gravity="center"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:id="@+id/imgPromocionesTipo"
-            android:layout_marginBottom="26dp"
-            android:layout_marginTop="26dp"/>
-
-    </LinearLayout>
-</RelativeLayout>
+            android:textSize="11dp"
+            android:text="De junio a Agosto difiere a 12 meses sin intereses todos tus consumos en lineas aereas, llama al 0100 Banorte, o da click aquí."/>
+    </LinearLayout>/>
+</LinearLayout>

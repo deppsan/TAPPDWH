@@ -6,18 +6,29 @@ package tarjetas.dwh.com.tarjetas.DTO;
 
 public class TransaccionesDTO {
 
+
+    private int id;
     private String fechaTransaccion;
     private String detalleTransaccion;
     private String puntos;
-    private String valorTransaccion;
+    private double valorTransaccion;
     private int categoria;
 
-    public TransaccionesDTO(String fechaTransaccion, String detalleTransaccion, String puntos, String valorTransaccion, int categoria) {
+    public TransaccionesDTO(int id, String fechaTransaccion, String detalleTransaccion, String puntos, double valorTransaccion, int categoria) {
+        this.id = id;
         this.fechaTransaccion = fechaTransaccion;
         this.detalleTransaccion = detalleTransaccion;
         this.puntos = puntos;
         this.valorTransaccion = valorTransaccion;
         this.categoria = categoria;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFechaTransaccion() {
@@ -44,11 +55,11 @@ public class TransaccionesDTO {
         this.puntos = puntos;
     }
 
-    public String getValorTransaccion() {
+    public double getValorTransaccion() {
         return valorTransaccion;
     }
 
-    public void setValorTransaccion(String valorTransaccion) {
+    public void setValorTransaccion(double valorTransaccion) {
         this.valorTransaccion = valorTransaccion;
     }
 

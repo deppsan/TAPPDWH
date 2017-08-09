@@ -105,4 +105,14 @@
         <item>Semanal</item>
         <item>Quincenal</item>
     </string-array>
+    <string-array name="spn_periodos">
+        <item>Mes Actual</item>
+        <item>Mes Anterior</item>
+        <item>Dos Meses Atras</item>
+    </string-array>
+
+
+    <string name="tab_title_recomendados">Recomendado</string>
+    <string name="tab_title_favoritos">Mis Favoritos</string>
+    <string name="tab_title_mas_productos">Mas productos</string>
 </resources>

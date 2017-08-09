@@ -15,4 +15,9 @@
     <color name="mostaza">#ffc900</color>
     <color name="blueFacebook">#0D8AFF</color>
     <color name="Saldos_Pagos">#F5F7F7</color>
+    <color name="amarillo_categoria">#fbb101</color>
+    <color name="verde_categoria">#a7f8b6</color>
+    <color name="rojo_categoria">#f9390d</color>
+    <color name="start_gradiente_seguimiento">#F2F2F2</color>
+    <color name="end_gradiente_seguimiento">#D1D1D3</color>
 </resources>

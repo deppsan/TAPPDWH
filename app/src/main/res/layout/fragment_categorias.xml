@@ -12,14 +12,16 @@
         android:id="@+id/grdCategorias"
         android:numColumns="3">
     </GridView>
-    <Button
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/red"
         android:layout_marginTop="-84dp"
         android:text="Mes"
         android:layout_below="@id/grdCategorias"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:entries="@array/spn_periodos"
+        android:textAlignment="center"
+        android:id="@+id/spn_CicloLimiteConfiguracion"></Spinner>
 </RelativeLayout>

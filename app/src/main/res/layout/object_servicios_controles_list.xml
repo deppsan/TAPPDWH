@@ -12,6 +12,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:lines="1"
+            android:textSize="13dp"
+            android:gravity="center_vertical"
             android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
             android:id="@+id/txtItemControlCabecera"/>
         <TextView
@@ -19,6 +22,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="@color/green"
+            android:textSize="@dimen/text_default_size"
             android:id="@+id/txtItemControlDescripcion"/>
     </LinearLayout>
     <Switch

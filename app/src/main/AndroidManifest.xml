@@ -32,6 +32,16 @@
                 <action android:name="android.intent.action.CATEGORY_EMBED"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activities.DetallesMisTarjetasUno"
+            android:parentActivityName="tarjetas.dwh.com.tarjetas.activities.MainPage"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tarjetas.dwh.com.tarjetas.activities.MainPage" />
+            <intent-filter>
+                <action android:name="android.intent.action.CATEGORY_EMBED"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".activities.Categorias"
             android:parentActivityName="tarjetas.dwh.com.tarjetas.activities.MainPage"
             android:screenOrientation="portrait">

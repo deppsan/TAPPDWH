@@ -5,12 +5,14 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import tarjetas.dwh.com.tarjetas.R;
 import tarjetas.dwh.com.tarjetas.fragments.CategoriasConfiguracionFragment;
 import tarjetas.dwh.com.tarjetas.fragments.CategoriasFragment;
+import tarjetas.dwh.com.tarjetas.fragments.Prueba;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.CategoriaCambiarImagenDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.CategoriaCrearDialog;
 import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
@@ -33,6 +35,7 @@ public class Categorias extends AppCompatActivity implements CategoriaCrearDialo
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
 
         setTitle("Categorias");
+        toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.white));
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -40,8 +43,7 @@ public class Categorias extends AppCompatActivity implements CategoriaCrearDialo
 
 
 
-
-        addFragment(R.id.content_categorias, new CategoriasFragment(), CategoriasFragment.FRAGMENT_TAG);
+       addFragment(R.id.content_categorias, new CategoriasFragment(), CategoriasFragment.FRAGMENT_TAG);
     }
 
     protected void addFragment(@IdRes int containerViewId,
@@ -88,6 +90,6 @@ public class Categorias extends AppCompatActivity implements CategoriaCrearDialo
 
     @Override
     public void aceptarCambiarImagen(int imagen, int imageDrawable) {
-        
+
     }
 }

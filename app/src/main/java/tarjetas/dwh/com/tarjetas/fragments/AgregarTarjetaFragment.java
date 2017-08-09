@@ -118,7 +118,6 @@ public class AgregarTarjetaFragment extends Fragment implements View.OnClickList
             YoYo.with(Techniques.Shake).duration(200).playOn(btnAceptar);
         }else{
             listener.onAgregarTarjeta(numTarjeta);
-            //listener.setTarjetaSharedPreference(numTarjeta);
             TarjetasApiClient.getInstance().confirmarTarjeta(numTarjeta,getContext(),this);
         }
     }

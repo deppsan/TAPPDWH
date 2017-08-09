@@ -51,7 +51,7 @@ public abstract class TransaccionesAdapter extends BaseAdapter {
             LayoutInflater v = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = v.inflate(_layout,null);
         }
-        onEntrada(transacciones.get(position),convertView);
+        onEntrada(transacciones.get(position),convertView, position);
         return convertView;
     }
 
@@ -60,7 +60,7 @@ public abstract class TransaccionesAdapter extends BaseAdapter {
         return true;
     }
 
-    public abstract void onEntrada(Object saldo, View view);
+    public abstract void onEntrada(Object saldo, View view, int position);
 
 
 }

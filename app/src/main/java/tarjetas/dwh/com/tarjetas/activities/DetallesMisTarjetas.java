@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Switch;
 
@@ -37,7 +38,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import tarjetas.dwh.com.tarjetas.DTO.Mensaje.mensaje;
 import tarjetas.dwh.com.tarjetas.DTO.MenuServiciosDTO;
+import tarjetas.dwh.com.tarjetas.DTO.TarjetasDTO;
 import tarjetas.dwh.com.tarjetas.R;
 import tarjetas.dwh.com.tarjetas.adapter.CategoriasDrawerAdapter;
 import tarjetas.dwh.com.tarjetas.adapter.TransaccionesAdapter;
@@ -53,7 +56,7 @@ import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosControlFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosIngresarNipFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosNipMenuFragment;
-import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosProgramaLealtadFragment;
+import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosProgramaLealtadFavoritosFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSaldosPagosFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSolicitarNipFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSubMenuFragment;
@@ -72,6 +75,7 @@ import tarjetas.dwh.com.tarjetas.fragments.dialog.CategoriaCrearDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ReporteRoboExtravioDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ServiciosControlBloqueoTarjetaDesactivarDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ServiciosControlBloqueoTarjetaDialog;
+import tarjetas.dwh.com.tarjetas.network.TarjetasApiClient;
 import tarjetas.dwh.com.tarjetas.utilities.ActivarFragmentos;
 import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
 import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
@@ -98,12 +102,13 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
                                                             , DetalleServiciosActivarTarjetaAvisoDialog.DetalleServiciosActivarTarjetaAvisoListener
                                                             , DetalleServiciosActivarTarjetaActivadaDialog.DetalleServiciosActivarTarjetaActivadaListener
                                                             , DetalleServiciosSaldosPagosFragment.DetalleServiciosSaldosPagosListener
-                                                            , DetalleServiciosProgramaLealtadFragment.DetalleServiciosProgramaLealtadListener
                                                             , ControlLineaCreditoModificarLineaFragment.ControlLineaCreditoModificarLineaListener
                                                             , DetalleServiciosControlLineaConfirmarModificarLineaDialog.DetalleServiciosControlLineaConfirmarAumentoLineaDialogListener
                                                             , DetalleServiciosControlLineaAvisoConfirmadoModificarLinea.DetalleServiciosControlLineaAvisoConfirmadoModificarLineaListener
                                                             , DetalleTransaccionesFragment.DetalleTransaccionesListener
-                                                            , CategoriaCrearDialog.DialogCrearCategoriaListener{
+                                                            , CategoriaCrearDialog.DialogCrearCategoriaListener
+                                                            , View.OnClickListener
+                                                            , TarjetasApiClient.TarjetasApiGetSaldosDetalle{
 
 
     private FragmentPagerAdapter adapterViewPagerSuperior;
@@ -120,27 +125,31 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     private TransaccionesAdapter tAdapterHolder;
     private int adapterPosition;
     private ArrayList<tarjetas.dwh.com.tarjetas.model.Categorias> categoriesImages;
+    private ImageView imgExpandir, image_tarjeta_one;
 
     private DialogFragment  dialog;
 
     private Context mContext;
+
+    private boolean isColapsed = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarjetas_detalle);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar_Tarjetas_detalle);
-
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
 
         mContext = this;
         int idTarjeta = getIntent().getIntExtra("idTarjeta",0);
 
         superiorViewPager = (ViewPager) findViewById(R.id.content_tarjetas_detail_superior);
         adapterViewPagerSuperior = new SuperiorPageAdapter(getSupportFragmentManager(),idTarjeta);
+        imgExpandir = (ImageView) findViewById(R.id.imgExpandir);
+        image_tarjeta_one = (ImageView) findViewById(R.id.image_tarjeta_one);
+        imgExpandir.setOnClickListener(this);
 
 
         DetalleTransaccionesFragment transaccionesFragment = new DetalleTransaccionesFragment();
@@ -214,6 +223,9 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
 
         lstNavigationCategory.bringToFront();
         drawerLayout.requestLayout();
+
+        TarjetasApiClient.getInstance().getDetalleSaldosTarjetas(idTarjeta,this,this);
+
 
     }
 
@@ -307,7 +319,6 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     @Override
     public void onClickSeleccionarMenu(Object menu, View view, int position) {
         MenuServiciosControlDrawerObject optMenu = (MenuServiciosControlDrawerObject) menu;
-
 
         switch (optMenu.getId()){
             case 0 :
@@ -524,6 +535,18 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
         RealmAdministrator.getInstance(getBaseContext()).crearCategoria(imagen,imagenDrawable,nombreCategoria);
     }
 
+    @Override
+    public void onSaldoRecibido(TarjetasDTO tarjeta) {
+
+        Picasso.with(this).load(tarjeta.getImagen()).placeholder(R.drawable.bankcard).into(image_tarjeta_one);
+    }
+
+    @Override
+    public void onFallaAlRecibirSaldo(mensaje error) {
+
+    }
+
+
     /**
      * Clase que controla al ViewPager superior en la actividad.
      */
@@ -694,7 +717,7 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
                 adapterViewPagerInferior.setPages(3,new DetalleSeguimientoDeTarjetaFragment());
                 break;
             case 3:
-                adapterViewPagerInferior.setPages(3,new DetalleServiciosProgramaLealtadFragment());
+                adapterViewPagerInferior.setPages(3,new DetalleServiciosProgramaLealtadFavoritosFragment());
                 break;
             case 4:
                 adapterViewPagerInferior.setPages(3, new DetalleServiciosActivarTarjetaFragment());
@@ -744,7 +767,7 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu,menu);
+        menuInflater.inflate(R.menu.menu_detalle,menu);
 
         return true;
     }
@@ -752,13 +775,45 @@ public class DetallesMisTarjetas extends AppCompatActivity implements DetalleSer
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.btnAgregarTarjeta:
+            case R.id.btnCategorias:
                 Intent i = new Intent(this,Categorias.class);
                 startActivity(i);
 
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.imgExpandir:
+                LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                LinearLayout.LayoutParams ps = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+                ViewPager.LayoutParams vp = new ViewPager.LayoutParams();
+
+                if(isColapsed){
+                    ps.weight = 2;
+                    p.weight = 1.3f;
+                    isColapsed = false;
+                    imgExpandir.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.solapa));
+                    image_tarjeta_one.setVisibility(View.VISIBLE);
+                }else{
+                    p.weight = 1;
+                    ps.weight = 4;
+                    isColapsed = true;
+                    imgExpandir.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.solapadown));
+                    image_tarjeta_one.setVisibility(View.GONE);
+                }
+
+                View i = (LinearLayout) inferiorViewPager.getParent();
+                i.setLayoutParams(p);
+
+                View s = (LinearLayout) superiorViewPager.getParent();
+                s.setLayoutParams(ps);
+            break;
         }
     }
 

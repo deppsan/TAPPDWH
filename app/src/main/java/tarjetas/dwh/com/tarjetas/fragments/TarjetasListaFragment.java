@@ -76,6 +76,8 @@ public class TarjetasListaFragment extends Fragment implements TarjetasApiClient
                 TextView text = (TextView) view.findViewById(R.id.txtNombreTarjeta);
                 ImageView image = (ImageView) view.findViewById(R.id.imgTarjetaLista);
 
+
+
                 text.setText(((TarjetaListaObject) tarjeta).getTarjetaNombre());
                 Picasso.with(getContext())
                         .load(((TarjetaListaObject) tarjeta).getIdImagen())

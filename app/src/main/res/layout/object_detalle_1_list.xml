@@ -10,13 +10,15 @@
         android:id="@+id/txtDescripcionDetalle1"
         android:textStyle="bold"
         android:gravity="left"
-        android:textColor="@color/black" />
+        android:textSize="@dimen/text_default_size"
+        android:textColor="@color/white" />
     <TextView
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:id="@+id/txtDetalle1"
         android:gravity="right"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_default_size"
         android:layout_toEndOf="@+id/txtDescripcionDetalle1"
         android:layout_toRightOf="@+id/txtDescripcionDetalle1" />
 </RelativeLayout>

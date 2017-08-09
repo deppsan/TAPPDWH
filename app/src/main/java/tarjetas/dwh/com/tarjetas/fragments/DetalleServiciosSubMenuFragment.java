@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import tarjetas.dwh.com.tarjetas.adapter.TransaccionesAdapter;
  * Created by ricar on 14/03/2017.
  */
 
-public class DetalleServiciosSubMenuFragment extends Fragment implements View.OnClickListener{
+public class DetalleServiciosSubMenuFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     ListView lstMenu;
     private DetalleServiciosSubMenuListener listener;
@@ -33,7 +34,7 @@ public class DetalleServiciosSubMenuFragment extends Fragment implements View.On
         View view = inflater.inflate(R.layout.fragment_detalle_servicios_lista_base, container, false);
 
         lstMenu = (ListView) view.findViewById(R.id.lstServiciosMenuInterno);
-        View btnRegresar = view.findViewById(R.id.btnRegresarMenuServicios);
+        View btnRegresar = inflater.inflate(R.layout.object_button_regresar_,container,false);
 
         ArrayList<MenuServiciosDTO> menu = new ArrayList<>();
 
@@ -44,7 +45,7 @@ public class DetalleServiciosSubMenuFragment extends Fragment implements View.On
 
         lstMenu.setAdapter(new TransaccionesAdapter(menu,R.layout.object_servicios_menu_list,getContext()) {
             @Override
-            public void onEntrada(final Object menu, View view) {
+            public void onEntrada(final Object menu, View view, int position) {
                 MenuServiciosDTO optMenu = (MenuServiciosDTO) menu;
 
                 TextView txtDescripcion = (TextView) view.findViewById(R.id.lblServiciosMenu);
@@ -61,18 +62,12 @@ public class DetalleServiciosSubMenuFragment extends Fragment implements View.On
                 });
             }
         });
-        btnRegresar.setOnClickListener(this);
+
+
+        lstMenu.addHeaderView(btnRegresar);
+        lstMenu.setOnItemClickListener(this);
 
         return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnRegresarMenuServicios:
-                listener.onClickRegresar();
-                break;
-        }
     }
 
     public interface DetalleServiciosSubMenuListener{
@@ -94,5 +89,12 @@ public class DetalleServiciosSubMenuFragment extends Fragment implements View.On
     public void onDetach() {
         super.onDetach();
         listener= null;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (view.getId() == R.id.btnObjectRegresar){
+            listener.onClickRegresar();
+        }
     }
 }
