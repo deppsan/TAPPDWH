@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class DetalleServiciosProgramaLealtadRecomendadosFragment extends Fragmen
     private ListView lstProgramaLealtad;
     private ProgramaLealtadFavoritosController controlarFavoritos;
     private ProgramaLealtadAdapter programaLealtadAdapter;
+    private static DetalleServiciosProgramaLealtadRecomendadosFragment instance = null;
 
     @Nullable
     @Override
@@ -84,9 +86,14 @@ public class DetalleServiciosProgramaLealtadRecomendadosFragment extends Fragmen
 
     }
 
-    private void updateListView(){
+
+    public void updateListView(){
         ArrayList<ProductosLealtad> productosLealtads = RealmAdministrator.getInstance(getContext()).getProductosLealtadSugeridos();
-        programaLealtadAdapter.actualizarDatos(productosLealtads);
+        try{
+            programaLealtadAdapter.actualizarDatos(productosLealtads);
+        }catch (Exception e){
+            Log.e("DetalleServiciosProgramaLealtadRecomendadosFragment",e.getMessage());
+        }
     }
 
     @Override
@@ -98,4 +105,14 @@ public class DetalleServiciosProgramaLealtadRecomendadosFragment extends Fragmen
     public void onResumeFragment() {
         updateListView();
     }
+
+
+    public static DetalleServiciosProgramaLealtadRecomendadosFragment getInstance(){
+        if(instance == null){
+            instance = new DetalleServiciosProgramaLealtadRecomendadosFragment();
+        }
+        return instance;
+    }
+
+    public DetalleServiciosProgramaLealtadRecomendadosFragment(){}
 }

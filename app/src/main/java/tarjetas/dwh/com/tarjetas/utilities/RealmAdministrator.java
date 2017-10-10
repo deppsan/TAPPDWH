@@ -510,6 +510,16 @@ public class RealmAdministrator {
         return productosLealtads;
     }
 
+    public ArrayList<ProductosLealtad> getProductosLealtadPorCategoria(int idCategoria){
+        ArrayList<ProductosLealtad> productosLealtads = new ArrayList<ProductosLealtad>();
+        RealmResults<ProductosLealtad> results = myRealm.where(ProductosLealtad.class).equalTo("tipoCategoria",idCategoria).findAll();
+
+        for (ProductosLealtad p : results){
+            productosLealtads.add(p);
+        }
+        return productosLealtads;
+    }
+
     public void setProductoLealtadFavorito(int idProducto,boolean isFavorite){
         openRealm();
 

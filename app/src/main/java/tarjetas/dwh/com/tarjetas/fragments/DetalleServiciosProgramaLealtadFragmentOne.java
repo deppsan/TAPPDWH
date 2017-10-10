@@ -13,20 +13,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 import tarjetas.dwh.com.tarjetas.R;
+import tarjetas.dwh.com.tarjetas.implementaciones.DetalleServiciosPogramaLealtadCategoriaProductoImpl;
 import tarjetas.dwh.com.tarjetas.interfaces.FragmentPageLifeCycle;
 
 /**
  * Created by ricar on 28/07/2017.
  */
 
-public class DetalleServiciosProgramaLealtadFragmentOne extends Fragment implements ViewPager.OnPageChangeListener{
+public class DetalleServiciosProgramaLealtadFragmentOne extends Fragment implements ViewPager.OnPageChangeListener, View.OnClickListener{
 
     TabLayout tabs;
     ViewPager viewPager;
     LinearLayout btnRegresar;
 
     ProgramaLealtadPageAdapter pageAdapter;
+    DetalleServiciosProgramaLealtadListener listener;
+
+    DetalleServiciosPogramaLealtadCategoriaProductoImpl detalleServiciosPogramaLealtadCategoriaProducto;
 
     int currentPosition = 0;
 
@@ -39,12 +45,23 @@ public class DetalleServiciosProgramaLealtadFragmentOne extends Fragment impleme
         viewPager = (ViewPager) v.findViewById(R.id.frame_fragment_viewpager);
         btnRegresar = (LinearLayout) v.findViewById(R.id.btnRegresarMenuServicios);
 
-        pageAdapter = new ProgramaLealtadPageAdapter(getChildFragmentManager(),getContext());
+        LinearLayout btnRegresar = (LinearLayout) v.findViewById(R.id.btnRegresarMenuServicios);
+
+        ArrayList<Fragment> pages = new ArrayList<>();
+
+        pages.add(new DetalleServiciosProgramaLealtadRecomendadosFragment());
+        pages.add(new DetalleServiciosProgramaLealtadMasProductosFragment());
+        pages.add(new DetalleServiciosProgramaLealtadFavoritosFragment());
+
+        pageAdapter = new ProgramaLealtadPageAdapter(getFragmentManager(),getContext(),pages);
+        detalleServiciosPogramaLealtadCategoriaProducto = DetalleServiciosPogramaLealtadCategoriaProductoImpl.getInstance(pageAdapter);
 
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(this);
+        btnRegresar.setOnClickListener(this);
 
         tabs.setupWithViewPager(viewPager);
+
 
         return v;
     }
@@ -67,6 +84,14 @@ public class DetalleServiciosProgramaLealtadFragmentOne extends Fragment impleme
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnRegresarMenuServicios:
+                listener.onClickRegresar();
+        }
+    }
+
     public static class ProgramaLealtadPageAdapter extends FragmentStatePagerAdapter {
 
         private static int NUM_ITEMS = 3;
@@ -75,26 +100,19 @@ public class DetalleServiciosProgramaLealtadFragmentOne extends Fragment impleme
                 R.string.tab_title_mas_productos,
                 R.string.tab_title_favoritos
         };
+        private ArrayList<Fragment> pages;
         Context mcontext;
 
 
-        public ProgramaLealtadPageAdapter(FragmentManager fm,Context context) {
+        public ProgramaLealtadPageAdapter(FragmentManager fm,Context context, ArrayList<Fragment> pages) {
             super(fm);
             this.mcontext = context;
+            this.pages = pages;
         }
 
         @Override
         public Fragment getItem(int i) {
-            switch (i){
-                case 0:
-                    return new DetalleServiciosProgramaLealtadRecomendadosFragment();
-                case 1:
-                    return new DetalleServiciosProgramaLealtadFavoritosFragment();
-                case 2:
-                    return new DetalleServiciosProgramaLealtadFavoritosFragment();
-                default:
-                    return null;
-            }
+            return pages.get(i);
         }
 
         @Override
@@ -107,6 +125,31 @@ public class DetalleServiciosProgramaLealtadFragmentOne extends Fragment impleme
             String t = mcontext.getResources().getString(titles[position]);
             return t;
         }
+
+        public void setPages(int position,Fragment fragment){
+            pages.remove(position);
+            pages.add(position,fragment);
+            this.notifyDataSetChanged();
+        }
     }
 
+    public interface DetalleServiciosProgramaLealtadListener{
+        void onClickRegresar();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof DetalleServiciosProgramaLealtadListener) {
+            listener = (DetalleServiciosProgramaLealtadListener) context;
+        } else {
+            throw new IllegalArgumentException(context.toString() + "debe de implementar en onAttach");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
 }

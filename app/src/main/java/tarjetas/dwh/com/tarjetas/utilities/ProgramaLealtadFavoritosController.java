@@ -2,7 +2,7 @@ package tarjetas.dwh.com.tarjetas.utilities;
 
 import android.content.Context;
 
-import tarjetas.dwh.com.tarjetas.implenetaciones.ProgramaLealtadFavoritosImpl;
+import tarjetas.dwh.com.tarjetas.implementaciones.ProgramaLealtadFavoritosImpl;
 import tarjetas.dwh.com.tarjetas.model.ProductosLealtad;
 
 /**

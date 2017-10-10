@@ -54,7 +54,6 @@ import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosControlFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosIngresarNipFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosNipMenuFragment;
-import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosProgramaLealtadFavoritosFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosProgramaLealtadFragmentOne;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSaldosPagosFragment;
 import tarjetas.dwh.com.tarjetas.fragments.DetalleServiciosSolicitarNipFragment;
@@ -74,7 +73,6 @@ import tarjetas.dwh.com.tarjetas.fragments.dialog.DetalleServiciosControlLineaCo
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ReporteRoboExtravioDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ServiciosControlBloqueoTarjetaDesactivarDialog;
 import tarjetas.dwh.com.tarjetas.fragments.dialog.ServiciosControlBloqueoTarjetaDialog;
-import tarjetas.dwh.com.tarjetas.implenetaciones.ProgramaLealtadFavoritosImpl;
 import tarjetas.dwh.com.tarjetas.utilities.ActivarFragmentos;
 import tarjetas.dwh.com.tarjetas.utilities.FragmentTags;
 import tarjetas.dwh.com.tarjetas.utilities.RealmAdministrator;
@@ -106,7 +104,8 @@ public class DetallesMisTarjetasUno extends AppCompatActivity implements Detalle
         , DetalleServiciosControlLineaAvisoConfirmadoModificarLinea.DetalleServiciosControlLineaAvisoConfirmadoModificarLineaListener
         , DetalleTransaccionesFragment.DetalleTransaccionesListener
         , CategoriaCrearDialog.DialogCrearCategoriaListener
-        , View.OnClickListener{
+        , View.OnClickListener
+        , DetalleServiciosProgramaLealtadFragmentOne.DetalleServiciosProgramaLealtadListener{
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;

@@ -40,6 +40,8 @@ public class DetalleServiciosProgramaLealtadFavoritosFragment extends Fragment i
     private ListView lstProgramaLealtad;
     private ProgramaLealtadAdapter programaLealtadAdapter;
     private ProgramaLealtadFavoritosController setFavorite;
+    private static DetalleServiciosProgramaLealtadFavoritosFragment instance = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -94,9 +96,13 @@ public class DetalleServiciosProgramaLealtadFavoritosFragment extends Fragment i
 
     }
 
-    private void updateListView(){
+    public void updateListView(){
         ArrayList<ProductosLealtad> productosLealtads = RealmAdministrator.getInstance(getContext()).getProductosLealtadFavoritos();
-        programaLealtadAdapter.actualizarDatos(productosLealtads);
+        try{
+            programaLealtadAdapter.actualizarDatos(productosLealtads);
+        }catch (Exception e){
+            Log.e("DetalleServiciosProgramaLealtadFavoritosFragment",e.getMessage());
+        }
     }
 
     @Override
@@ -109,4 +115,13 @@ public class DetalleServiciosProgramaLealtadFavoritosFragment extends Fragment i
     public void onResumeFragment() {
         updateListView();
     }
+
+    public static DetalleServiciosProgramaLealtadFavoritosFragment getInstance(){
+        if(instance == null){
+            instance = new DetalleServiciosProgramaLealtadFavoritosFragment();
+        }
+        return instance;
+    }
+
+    public DetalleServiciosProgramaLealtadFavoritosFragment(){}
 }

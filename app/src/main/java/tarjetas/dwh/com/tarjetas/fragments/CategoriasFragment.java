@@ -128,10 +128,6 @@ public class CategoriasFragment extends Fragment implements AdapterView.OnItemCl
                 mHolder.imgEditar.setOnClickListener(customOnClickListener);
                 mHolder.imgEliminar.setOnClickListener(customOnClickListener);
 
-/*                Glide.with(getContext()).load(d.getImagenDrawer()).crossFade().thumbnail(0.5f)
-                        .bitmapTransform(new CircleTransform(getContext()))
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(mHolder.imageView);*/
                 Picasso.with(getContext()).load(d.getImagenDrawer()).into(mHolder.imageView);
             }
         });

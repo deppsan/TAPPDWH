@@ -5,5 +5,5 @@ package tarjetas.dwh.com.tarjetas.interfaces;
  */
 
 public interface FragmentPageLifeCycle {
-    public void onResumeFragment();
+    void onResumeFragment();
 }
